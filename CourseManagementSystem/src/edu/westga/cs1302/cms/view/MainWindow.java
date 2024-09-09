@@ -3,6 +3,8 @@ package edu.westga.cs1302.cms.view;
 import edu.westga.cs1302.cms.model.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
@@ -26,7 +28,14 @@ public class MainWindow {
 
     @FXML
     void removeStudent(ActionEvent event) {
-
+    	Student student = this.students.getSelectionModel().getSelectedItem();
+    	if (student != null) {
+    	this.students.getItems().remove(student);
+    	} else {
+    		Alert errorPopup = new Alert(AlertType.ERROR);
+    		errorPopup.setContentText("No student selected. Please select a student to remove.");
+    		errorPopup.showAndWait();
+    	}
     }
 
     @FXML
