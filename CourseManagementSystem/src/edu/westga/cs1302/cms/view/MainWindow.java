@@ -16,12 +16,14 @@ import javafx.scene.control.TextField;
 public class MainWindow {
     @FXML private TextField name;
     @FXML private ListView<Student> students;
+    @FXML private TextField grade;
 
     @FXML
     void addStudent(ActionEvent event) {
+    	int grade = Integer.parseInt(this.grade.getText());
     	String studentName = this.name.getText();
     	
-    	Student student = new Student(studentName);
+    	Student student = new Student(studentName, grade);
     	
     	this.students.getItems().add(student);
     }
