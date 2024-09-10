@@ -24,10 +24,11 @@ public class Student {
 		if (name.length() < 3) {
 			throw new IllegalArgumentException("Name must have at least 3 characters.");
 		}
-		if (grade < 0) {
-			throw new IllegalArgumentException("Grade must be 0 or more.");
+		if (grade < 0 || grade > 100) {
+			throw new IllegalArgumentException("Grade must be between 0 and 100");
 		}
 		this.name = name;
+		this.grade = grade;
 	}
 	
 	/** Return the name of the student

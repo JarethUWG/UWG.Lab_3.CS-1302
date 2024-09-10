@@ -39,6 +39,21 @@ public class MainWindow {
     		errorPopup.showAndWait();
     	}
     }
+    
+    @FXML
+    void showGrade(ActionEvent event) {
+    	Student student = this.students.getSelectionModel().getSelectedItem();
+    	if (student != null) {
+        	int studentGrade = student.getGrade();
+        	Alert infoPopup = new Alert(AlertType.INFORMATION);
+        	infoPopup.setContentText(student.getName() + "'s current grade is: " + studentGrade);
+        	infoPopup.showAndWait();
+        	} else {
+        		Alert errorPopup = new Alert(AlertType.ERROR);
+        		errorPopup.setContentText("No student selected. Please select a student you want to see the grade of.");
+        		errorPopup.showAndWait();
+        	}
+    }
 
     @FXML
     void initialize() {
