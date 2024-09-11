@@ -21,12 +21,27 @@ public class MainWindow {
 
     @FXML
     void addStudent(ActionEvent event) {
-    	int grade = Integer.parseInt(this.grade.getText());
     	String studentName = this.name.getText();
+    	try {
+    		int grade = Integer.parseInt(this.grade.getText());
+    		Student student = new Student(studentName, grade);
+        	this.students.getItems().add(student);
+    	} catch (NumberFormatException gradeError) {
+    		Alert errorPopup = new Alert(AlertType.ERROR);
+    		errorPopup.setContentText("Unable to add student: " + gradeError.getMessage() + ". Please add a grade to the grade box.");
+    		errorPopup.showAndWait();
+    	} catch (IllegalArgumentException badInputError) {
+    		if (badInputError.getMessage().equals("Grade must be between 0 and 100")) {
+    			Alert errorPopup = new Alert(AlertType.ERROR);
+        		errorPopup.setContentText("Unable to add student: " + badInputError.getMessage() + " Please add a grade between 0 and 100 in the grade box.");
+        		errorPopup.showAndWait();
+    		} else {
+    		Alert errorPopup = new Alert(AlertType.ERROR);
+    		errorPopup.setContentText("Unable to add student: " + badInputError.getMessage() + ". Please name a thats 3 letters or longer to the name box.");
+    		errorPopup.showAndWait();
+    		}
+    	}
     	
-    	Student student = new Student(studentName, grade);
-    	
-    	this.students.getItems().add(student);
     	this.displayAverageGrade();
     }
 
