@@ -17,6 +17,7 @@ public class MainWindow {
     @FXML private TextField name;
     @FXML private ListView<Student> students;
     @FXML private TextField grade;
+    @FXML private ListView<String> averageGrade;
 
     @FXML
     void addStudent(ActionEvent event) {
@@ -26,6 +27,7 @@ public class MainWindow {
     	Student student = new Student(studentName, grade);
     	
     	this.students.getItems().add(student);
+    	this.displayAverageGrade();
     }
 
     @FXML
@@ -38,6 +40,7 @@ public class MainWindow {
     		errorPopup.setContentText("No student selected. Please select a student to remove.");
     		errorPopup.showAndWait();
     	}
+    	this.displayAverageGrade();
     }
     
     @FXML
@@ -53,6 +56,27 @@ public class MainWindow {
         		errorPopup.setContentText("No student selected. Please select a student you want to see the grade of.");
         		errorPopup.showAndWait();
         	}
+    }
+    
+    @FXML
+    void displayAverageGrade() {
+    	this.averageGrade.getItems().clear();
+    	String currentAverageGrade = "N/a";
+    	if (this.students.getItems().isEmpty()) {
+    		this.averageGrade.getItems().add(currentAverageGrade);
+    	} else {
+    		int gradeSum = 0;
+    		for (Student currentStudent: this.students.getItems()) {
+    			int singleGrade = currentStudent.getGrade();
+    			gradeSum += singleGrade;
+    		}
+    		double averageTotal = (gradeSum + 0.0) / this.students.getItems().size();
+    		currentAverageGrade = averageTotal + "";
+    		if (currentAverageGrade.length() > 4) {
+    			currentAverageGrade = currentAverageGrade.substring(0, 5);
+    		}
+    		this.averageGrade.getItems().add(currentAverageGrade);
+    	}
     }
 
     @FXML
