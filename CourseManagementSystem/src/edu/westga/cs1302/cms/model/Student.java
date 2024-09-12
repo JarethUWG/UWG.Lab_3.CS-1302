@@ -11,8 +11,8 @@ public class Student {
 	
 	/** Create a new student with the specified name
 	 * 
-	 * @precondition name != null && name.length() >= 3
-	 * @postcondition getName() == name
+	 * @precondition name != null && name.length() >= 3 && grade >= 0 && grade <= 100
+	 * @postcondition getName() == name && getGrade() == grade
 	 * 
 	 * @param name the name of the new student
 	 * @param grade the grade of the new student
