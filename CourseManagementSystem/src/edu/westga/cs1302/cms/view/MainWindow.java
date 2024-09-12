@@ -27,21 +27,30 @@ public class MainWindow {
     		Student student = new Student(studentName, grade);
         	this.students.getItems().add(student);
     	} catch (NumberFormatException gradeError) {
-    		Alert errorPopup = new Alert(AlertType.ERROR);
-    		errorPopup.setContentText("Unable to add student: " + gradeError.getMessage() + ". Please add a grade to the grade box.");
-    		errorPopup.showAndWait();
+    		if (studentName.equals("")) {
+    			Alert errorPopup = new Alert(AlertType.ERROR);
+        		errorPopup.setContentText("Unable to add student: " + gradeError.getMessage() + ". Please add a grade and name to the grade and name boxes.");
+        		errorPopup.showAndWait();
+    		} else if (studentName.length() < 3) {
+    			Alert errorPopup = new Alert(AlertType.ERROR);
+        		errorPopup.setContentText("Unable to add student: " + gradeError.getMessage() + ". Please add a grade and name at least 3 letters long to the grade and name boxes.");
+        		errorPopup.showAndWait();
+    		} else {
+    			Alert errorPopup = new Alert(AlertType.ERROR);
+    			errorPopup.setContentText("Unable to add student: " + gradeError.getMessage() + ". Please add a whole number grade to the grade box.");
+    			errorPopup.showAndWait();
+    		}
     	} catch (IllegalArgumentException badInputError) {
-    		if (badInputError.getMessage().equals("Grade must be between 0 and 100")) {
+    		if (badInputError.getMessage().equals("Grade must be between 0 and 100.")) {
     			Alert errorPopup = new Alert(AlertType.ERROR);
         		errorPopup.setContentText("Unable to add student: " + badInputError.getMessage() + " Please add a grade between 0 and 100 in the grade box.");
         		errorPopup.showAndWait();
     		} else {
     		Alert errorPopup = new Alert(AlertType.ERROR);
-    		errorPopup.setContentText("Unable to add student: " + badInputError.getMessage() + ". Please name a thats 3 letters or longer to the name box.");
+    		errorPopup.setContentText("Unable to add student: " + badInputError.getMessage() + " Please add a name thats 3 letters or longer to the name box.");
     		errorPopup.showAndWait();
     		}
     	}
-    	
     	this.displayAverageGrade();
     }
 
