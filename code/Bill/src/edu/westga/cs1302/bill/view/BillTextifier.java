@@ -1,6 +1,7 @@
 package edu.westga.cs1302.bill.view;
 
 import edu.westga.cs1302.bill.model.Bill;
+import edu.westga.cs1302.bill.model.BillCalculator;
 import edu.westga.cs1302.bill.model.BillItem;
 
 /**
@@ -17,6 +18,8 @@ public class BillTextifier {
 	 * @precondition none
 	 * @postcondition none
 	 * 
+	 * @param bill the bill to be summarized
+	 * 
 	 * @return a String summarizing the bill
 	 */
 	public static String getText(Bill bill) {
@@ -32,10 +35,10 @@ public class BillTextifier {
 		}
 
 		text += System.lineSeparator();
-		text += "SUBTOTAL - " + BillTextifier.convertToCurrency(bill.getSubTotal()) + System.lineSeparator();
-		text += "TAX - " + BillTextifier.convertToCurrency(bill.getTax()) + System.lineSeparator();
-		text += "TIP - " + BillTextifier.convertToCurrency(bill.getTip()) + System.lineSeparator();
-		text += "TOTAL - " + BillTextifier.convertToCurrency(bill.getTotal());
+		text += "SUBTOTAL - " + BillTextifier.convertToCurrency(BillCalculator.getSubTotal(bill.getItems())) + System.lineSeparator();
+		text += "TAX - " + BillTextifier.convertToCurrency(BillCalculator.getTax(bill.getItems())) + System.lineSeparator();
+		text += "TIP - " + BillTextifier.convertToCurrency(BillCalculator.getTip(bill.getItems())) + System.lineSeparator();
+		text += "TOTAL - " + BillTextifier.convertToCurrency(BillCalculator.getTotal(bill.getItems()));
 
 		return text;
 	}
