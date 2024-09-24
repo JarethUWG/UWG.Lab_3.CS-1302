@@ -6,8 +6,8 @@ package edu.westga.cs1302.project_1.model;
  * @version Fall 2024
  */
 public class Food {
-	private String name;
-	private String type;
+	private final String name;
+	private final String type;
 	private int quantity;
 	
 	/** Create a new food with the specified name and type
@@ -31,20 +31,6 @@ public class Food {
 		this.name = name;
 		this.type = type;
 		this.quantity = 0;
-	}
-	
-	/** Updates the value of quantity by a specified amount
-	 * 
-	 * @precondition inputValue + quantity >= 0
-	 * @postcondition this.quantity += inputValue
-	 * 
-	 * @param inputValue the amount to change quantity by
-	 */
-	public void updateQuantity(int inputValue) {
-		if ((inputValue + this.quantity) < 0) {
-			throw new IllegalArgumentException("Cannot decrease quantity below zero.");
-		}
-		this.quantity += inputValue;
 	}
 	
 	/** Creates a formatted string containing the name and quantity of the food
