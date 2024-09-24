@@ -33,6 +33,47 @@ public class Food {
 		this.quantity = 0;
 	}
 	
+	/** Sets this.quantity to a new value
+	 * 
+	 * @precondition nextQuantity >= 0 && nextQuantity <= Integer.MAX_VALUE
+	 * @postcondition this.quantity == nextQuantity
+	 * 
+	 * @param nextQuantity the new quantity that this.quantity is to be set to
+	 */
+	void setNextQuantity(int nextQuantity) {
+		if (nextQuantity < 0) {
+			throw new IllegalArgumentException("Cannot set quantity to value less than 0.");
+		}
+		if (nextQuantity > Integer.MAX_VALUE) {
+			throw new IllegalArgumentException("Cannot set quantity to value higher than integer limit.");
+		}
+		this.quantity = nextQuantity;
+	}
+	
+	/** Increases the value of this.quantity by one
+	 * 
+	 * @precondition this.quantity++ <= Integer.MAX_VALUE
+	 * @postcondition this.quantity++
+	 */
+	void incrementQuantity() {
+		if (this.quantity == Integer.MAX_VALUE) {
+			throw new IllegalStateException("Cannot increase quantity past integer limit.");
+		}
+		this.quantity++;
+	}
+	
+	/** Decreases the value of this.quantity by one
+	 * 
+	 * @precondition this.quantity-- >= 0
+	 * @postcondition this.quantity--
+	 */
+	void decrementQuantity() {
+		if (this.quantity == 0) {
+			throw new IllegalStateException("Cannot decrease quantity below integer limit.");
+		}
+		this.quantity--;
+	}
+	
 	/** Creates a formatted string containing the name and quantity of the food
 	 * 
 	 * @return a formatted string containing the name and quantity of the food
