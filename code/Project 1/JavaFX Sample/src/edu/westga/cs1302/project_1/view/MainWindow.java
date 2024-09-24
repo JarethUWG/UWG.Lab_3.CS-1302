@@ -26,6 +26,9 @@ public class MainWindow {
 
 	    @FXML
 	    private ComboBox<String> type;
+	    
+	    @FXML
+	    private TextField nextQuantity;
 
 	    @FXML
 	    void addFood(ActionEvent event) {
@@ -49,6 +52,21 @@ public class MainWindow {
 	        		errorPopup.showAndWait();
 	    		}
 	    	}
+	    	
+	    }
+	    
+	    @FXML
+	    void setFood(ActionEvent event) {
+	    	
+	    }
+	    
+	    @FXML
+	    void increaseFood(ActionEvent event) {
+	    	
+	    }
+	    
+	    @FXML
+	    void decreaseFood(ActionEvent event) {
 	    	
 	    }
 	    
