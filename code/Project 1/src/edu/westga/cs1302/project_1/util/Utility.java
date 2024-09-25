@@ -1,7 +1,9 @@
 package edu.westga.cs1302.project_1.util;
 
 import edu.westga.cs1302.project_1.model.Food;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * Manages static methods
@@ -23,5 +25,18 @@ public class Utility {
 			sumFood += currentFood.getQuantity();
 		}
 		return sumFood;
+	}
+	
+	/**
+	 * Sums up all quantities of all the foods in a list view
+	 * 
+	 * @param unableMessage a message to be put before the error often use to state what can't be done
+	 * @param recommendationMessage a message to be put after the error often used to suggest how to resolve the error
+	 * @param exception the error which a general message is gotten from
+	 */
+	public static void errorPopupGenerator(String unableMessage, String recommendationMessage, Exception exception) {
+		Alert errorPopup = new Alert(AlertType.ERROR);
+		errorPopup.setContentText(unableMessage + exception.getMessage() + recommendationMessage);
+		errorPopup.showAndWait();
 	}
 }
