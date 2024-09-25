@@ -1,6 +1,7 @@
 package edu.westga.cs1302.project_1.view;
 
 import edu.westga.cs1302.project_1.model.Food;
+import edu.westga.cs1302.project_1.util.Utility;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.TextField;
@@ -68,7 +69,16 @@ public class MainWindow {
 	    
 	    @FXML
 	    void countQuantities(ActionEvent event) {
-	    	
+	    	int quantitySum = Utility.quantitySum(this.pantry);
+	    	if (quantitySum == 1) {
+	    		Alert infoPopup = new Alert(AlertType.INFORMATION);
+	    		infoPopup.setContentText("There is currently " + quantitySum + " food item in the pantry.");
+	    		infoPopup.showAndWait();
+	    	} else {
+	    		Alert infoPopup = new Alert(AlertType.INFORMATION);
+	    		infoPopup.setContentText("There are currently " + quantitySum + " food items in the pantry.");
+	    		infoPopup.showAndWait();
+	    	}
 	    }
 	    
 	    @FXML
