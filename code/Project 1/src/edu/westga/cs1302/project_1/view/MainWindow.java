@@ -52,7 +52,11 @@ public class MainWindow {
 	        		errorPopup.showAndWait();
 	    		}
 	    	}
+	    }
 	    	
+	    @FXML
+	    void removeFood(ActionEvent event) {
+	    		
 	    }
 	    
 	    @FXML

@@ -20,5 +20,6 @@
       <Button layoutX="265.0" layoutY="97.0" mnemonicParsing="false" onAction="#setFood" prefHeight="26.0" prefWidth="34.0" text="Set" />
       <Button layoutX="206.0" layoutY="136.0" mnemonicParsing="false" onAction="#increaseFood" prefHeight="26.0" prefWidth="92.0" text="Increase by 1" />
       <Button layoutX="207.0" layoutY="178.0" mnemonicParsing="false" onAction="#decreaseFood" text="Decrease by 1" />
+      <Button layoutX="258.0" layoutY="31.0" mnemonicParsing="false" onAction="#removeFood" prefHeight="25.0" prefWidth="25.0" text="-" />
    </children>
 </AnchorPane>
