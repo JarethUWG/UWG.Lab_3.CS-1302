@@ -57,17 +57,64 @@ public class MainWindow {
 	    
 	    @FXML
 	    void setFood(ActionEvent event) {
-	    	
+	    	Food currentFood = this.pantry.getSelectionModel().getSelectedItem();
+	    	try {
+	    		int currentQuantity = Integer.parseInt(this.nextQuantity.getText());
+	    		currentFood.setNextQuantity(currentQuantity);
+	    		this.pantry.refresh();
+	    	} catch (NumberFormatException quantityError) {
+	    		Alert errorPopup = new Alert(AlertType.ERROR);
+        		errorPopup.setContentText("Unable to set quantity: " + quantityError.getMessage() + ". Please add a whole positive number to the box.");
+        		errorPopup.showAndWait();
+	    	} catch (IllegalArgumentException argumentError) {
+	    		if (Integer.parseInt(this.nextQuantity.getText()) < 0) {
+	    			Alert errorPopup = new Alert(AlertType.ERROR);
+	        		errorPopup.setContentText("Unable to set quantity: " + argumentError.getMessage() + " Please add a whole positive number to the box.");
+	        		errorPopup.showAndWait();
+	    		} else if (Integer.parseInt(this.nextQuantity.getText()) > Integer.MAX_VALUE) {
+	    			Alert errorPopup = new Alert(AlertType.ERROR);
+	        		errorPopup.setContentText("Unable to set quantity: " + argumentError.getMessage() + " Please add a smaller number to the box.");
+	        		errorPopup.showAndWait();
+	    		}
+	    	} catch (NullPointerException nullError) {
+	    		Alert errorPopup = new Alert(AlertType.ERROR);
+        		errorPopup.setContentText("Unable to set quantity: " + nullError.getMessage() + ". Please select a food to set the quantity of.");
+        		errorPopup.showAndWait();
+	    	} 
 	    }
 	    
 	    @FXML
 	    void increaseFood(ActionEvent event) {
-	    	
+	    	Food currentFood = this.pantry.getSelectionModel().getSelectedItem();
+	    	try {
+	    		currentFood.incrementQuantity();
+	    		this.pantry.refresh();
+	    	} catch (IllegalStateException tooHighError) {
+	    		Alert errorPopup = new Alert(AlertType.ERROR);
+        		errorPopup.setContentText("Unable to increase quantity: " + tooHighError.getMessage() + " Cannot increase the quantity of food any higher.");
+        		errorPopup.showAndWait();
+	    	} catch (NullPointerException nullError) {
+	    		Alert errorPopup = new Alert(AlertType.ERROR);
+        		errorPopup.setContentText("Unable to increase quantity: " + nullError.getMessage() + ". Please select a food to increase the quantity of.");
+        		errorPopup.showAndWait();
+	    	} 
 	    }
 	    
 	    @FXML
 	    void decreaseFood(ActionEvent event) {
-	    	
+	    	Food currentFood = this.pantry.getSelectionModel().getSelectedItem();
+	    	try {
+	    		currentFood.decrementQuantity();
+	    		this.pantry.refresh();
+	    	} catch (IllegalStateException tooHighError) {
+	    		Alert errorPopup = new Alert(AlertType.ERROR);
+        		errorPopup.setContentText("Unable to decrease quantity: " + tooHighError.getMessage() + " Cannot decrease the quantity of food any lower.");
+        		errorPopup.showAndWait();
+	    	} catch (NullPointerException nullError) {
+	    		Alert errorPopup = new Alert(AlertType.ERROR);
+        		errorPopup.setContentText("Unable to decrease quantity: " + nullError.getMessage() + ". Please select a food to decrease the quantity of.");
+        		errorPopup.showAndWait();
+	    	} 
 	    }
 	    
 	    @FXML

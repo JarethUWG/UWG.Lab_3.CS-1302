@@ -40,7 +40,7 @@ public class Food {
 	 * 
 	 * @param nextQuantity the new quantity that this.quantity is to be set to
 	 */
-	void setNextQuantity(int nextQuantity) {
+	public void setNextQuantity(int nextQuantity) {
 		if (nextQuantity < 0) {
 			throw new IllegalArgumentException("Cannot set quantity to value less than 0.");
 		}
@@ -55,7 +55,7 @@ public class Food {
 	 * @precondition this.quantity++ <= Integer.MAX_VALUE
 	 * @postcondition this.quantity++
 	 */
-	void incrementQuantity() {
+	public void incrementQuantity() {
 		if (this.quantity == Integer.MAX_VALUE) {
 			throw new IllegalStateException("Cannot increase quantity past integer limit.");
 		}
@@ -67,7 +67,7 @@ public class Food {
 	 * @precondition this.quantity-- >= 0
 	 * @postcondition this.quantity--
 	 */
-	void decrementQuantity() {
+	public void decrementQuantity() {
 		if (this.quantity == 0) {
 			throw new IllegalStateException("Cannot decrease quantity below integer limit.");
 		}
