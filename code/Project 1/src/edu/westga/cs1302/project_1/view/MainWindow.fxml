@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="248.0" minWidth="266.0" prefHeight="248.0" prefWidth="308.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs1302.project_1.view.MainWindow">
+<AnchorPane minHeight="248.0" minWidth="266.0" prefHeight="266.0" prefWidth="308.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs1302.project_1.view.MainWindow">
    <children>
       <Label layoutX="32.0" layoutY="14.0" text="Food name" />
       <TextField fx:id="name" layoutX="23.0" layoutY="31.0" prefHeight="25.0" prefWidth="78.0" />
@@ -15,11 +15,12 @@
       <ComboBox fx:id="type" layoutX="120.0" layoutY="31.0" prefHeight="25.0" prefWidth="72.0" />
       <Button layoutX="219.0" layoutY="31.0" mnemonicParsing="false" onAction="#addFood" prefHeight="25.0" prefWidth="25.0" text="+" />
       <ListView fx:id="pantry" layoutX="20.0" layoutY="72.0" prefHeight="155.0" prefWidth="179.0" />
-      <Label layoutX="209.0" layoutY="72.0" text="Modify Quantity" />
-      <TextField fx:id="nextQuantity" layoutX="204.0" layoutY="97.0" prefHeight="26.0" prefWidth="54.0" />
-      <Button layoutX="265.0" layoutY="97.0" mnemonicParsing="false" onAction="#setFood" prefHeight="26.0" prefWidth="34.0" text="Set" />
-      <Button layoutX="206.0" layoutY="136.0" mnemonicParsing="false" onAction="#increaseFood" prefHeight="26.0" prefWidth="92.0" text="Increase by 1" />
-      <Button layoutX="207.0" layoutY="178.0" mnemonicParsing="false" onAction="#decreaseFood" text="Decrease by 1" />
+      <Label layoutX="210.0" layoutY="79.0" text="Modify Quantity" />
+      <TextField fx:id="nextQuantity" layoutX="205.0" layoutY="110.0" prefHeight="26.0" prefWidth="54.0" />
+      <Button layoutX="266.0" layoutY="110.0" mnemonicParsing="false" onAction="#setFood" prefHeight="26.0" prefWidth="34.0" text="Set" />
+      <Button layoutX="207.0" layoutY="150.0" mnemonicParsing="false" onAction="#increaseFood" prefHeight="26.0" prefWidth="92.0" text="Increase by 1" />
+      <Button layoutX="207.0" layoutY="189.0" mnemonicParsing="false" onAction="#decreaseFood" text="Decrease by 1" />
       <Button layoutX="258.0" layoutY="31.0" mnemonicParsing="false" onAction="#removeFood" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button layoutX="66.0" layoutY="233.0" mnemonicParsing="false" onAction="#countQuantities" prefHeight="25.0" prefWidth="87.0" text="Count Foods" />
    </children>
 </AnchorPane>

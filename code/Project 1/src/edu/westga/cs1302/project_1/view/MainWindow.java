@@ -67,6 +67,11 @@ public class MainWindow {
 	    }
 	    
 	    @FXML
+	    void countQuantities(ActionEvent event) {
+	    	
+	    }
+	    
+	    @FXML
 	    void setFood(ActionEvent event) {
 	    	Food currentFood = this.pantry.getSelectionModel().getSelectedItem();
 	    	try {
