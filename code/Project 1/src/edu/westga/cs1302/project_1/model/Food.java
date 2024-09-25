@@ -22,7 +22,7 @@ public class Food {
 		if (name == null) {
 			throw new IllegalArgumentException("Name must be provided.");
 		}
-		if (name.length() < 1) {
+		if (name.isBlank()) {
 			throw new IllegalArgumentException("Name must have at least 1 character.");
 		}
 		if (type == null) {
@@ -35,7 +35,7 @@ public class Food {
 	
 	/** Sets this.quantity to a new value
 	 * 
-	 * @precondition nextQuantity >= 0 && nextQuantity <= Integer.MAX_VALUE
+	 * @precondition nextQuantity >= 0
 	 * @postcondition this.quantity == nextQuantity
 	 * 
 	 * @param nextQuantity the new quantity that this.quantity is to be set to
@@ -43,9 +43,6 @@ public class Food {
 	public void setNextQuantity(int nextQuantity) {
 		if (nextQuantity < 0) {
 			throw new IllegalArgumentException("Cannot set quantity to value less than 0.");
-		}
-		if (nextQuantity > Integer.MAX_VALUE) {
-			throw new IllegalArgumentException("Cannot set quantity to value higher than integer limit.");
 		}
 		this.quantity = nextQuantity;
 	}
@@ -69,7 +66,7 @@ public class Food {
 	 */
 	public void decrementQuantity() {
 		if (this.quantity == 0) {
-			throw new IllegalStateException("Cannot decrease quantity below integer limit.");
+			throw new IllegalStateException("Cannot decrease quantity below 0.");
 		}
 		this.quantity--;
 	}
