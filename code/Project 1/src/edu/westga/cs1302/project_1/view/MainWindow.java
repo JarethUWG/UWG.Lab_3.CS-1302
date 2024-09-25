@@ -56,7 +56,14 @@ public class MainWindow {
 	    	
 	    @FXML
 	    void removeFood(ActionEvent event) {
-	    		
+	    	Food badFood = this.pantry.getSelectionModel().getSelectedItem();
+        	if (badFood != null) {
+        	this.pantry.getItems().remove(badFood);
+        	} else {
+        		Alert errorPopup = new Alert(AlertType.ERROR);
+        		errorPopup.setContentText("No food selected. Please select a food to remove.");
+        		errorPopup.showAndWait();
+        	}	
 	    }
 	    
 	    @FXML
