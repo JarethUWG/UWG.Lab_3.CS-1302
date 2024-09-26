@@ -14,7 +14,7 @@ import javafx.fxml.FXML;
 
 /** Codebehind for the Main Window of the application.
  * 
- * @author CS 1302
+ * @author Jareth Batty
  * @version Fall 2024
  */
 public class MainWindow {
