@@ -2,7 +2,7 @@ package edu.westga.cs1302.project_1.model;
 
 /** Stores and manages information for a single food
  * 
- * @author CS 1302
+ * @author Jareth Batty
  * @version Fall 2024
  */
 public class Food {
@@ -17,8 +17,10 @@ public class Food {
 	 * 
 	 * @param name the name of the new food
 	 * @param type the type of the new food
+	 * 
+	 * @throws IllegalArgumentException when precondition is violated
 	 */
-	public Food(String name, String type) {
+	public Food(String name, String type) throws IllegalArgumentException {
 		if (name == null) {
 			throw new IllegalArgumentException("Name must be provided.");
 		}
@@ -39,8 +41,10 @@ public class Food {
 	 * @postcondition this.quantity == nextQuantity
 	 * 
 	 * @param nextQuantity the new quantity that this.quantity is to be set to
+	 * 
+	 * @throws IllegalArgumentException when precondition is violated
 	 */
-	public void setNextQuantity(int nextQuantity) {
+	public void setNextQuantity(int nextQuantity) throws IllegalArgumentException {
 		if (nextQuantity < 0) {
 			throw new IllegalArgumentException("Cannot set quantity to value less than 0.");
 		}
@@ -51,8 +55,10 @@ public class Food {
 	 * 
 	 * @precondition this.quantity++ <= Integer.MAX_VALUE
 	 * @postcondition this.quantity++
+	 * 
+	 * @throws IllegalStateException when incrementing would result in an integer overflow
 	 */
-	public void incrementQuantity() {
+	public void incrementQuantity() throws IllegalStateException {
 		if (this.quantity == Integer.MAX_VALUE) {
 			throw new IllegalStateException("Cannot increase quantity past integer limit.");
 		}
@@ -63,8 +69,10 @@ public class Food {
 	 * 
 	 * @precondition this.quantity-- >= 0
 	 * @postcondition this.quantity--
+	 * 
+	 * @throws IllegalStateException when decrementing would result in negative values
 	 */
-	public void decrementQuantity() {
+	public void decrementQuantity() throws IllegalStateException {
 		if (this.quantity == 0) {
 			throw new IllegalStateException("Cannot decrease quantity below 0.");
 		}

@@ -6,7 +6,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Alert.AlertType;
 
 /**
- * Manages static methods
+ * Manages static methods related to UI components
  * 
  * @author Jareth Batty
  * @version Fall 2024
@@ -19,9 +19,12 @@ public class Utility {
 	 * @precondition foodList != null
 	 * 
 	 * @param foodList the list view to sum
+	 * 
+	 * @throws IllegalArgumentException when precondition is violated
+	 * 
 	 * @return sumFood the sum of all quantities of all foods in the list view
 	 */
-	public static int quantitySum(ListView<Food> foodList) {
+	public static int quantitySum(ListView<Food> foodList) throws IllegalArgumentException {
 		if (foodList == null) {
 			throw new IllegalArgumentException("Improper list input");
 		}
@@ -40,8 +43,10 @@ public class Utility {
 	 * @param unableMessage a message to be put before the error often use to state what can't be done
 	 * @param recommendationMessage a message to be put after the error often used to suggest how to resolve the error
 	 * @param exception the error which a general message is gotten from
+	 * 
+	 * @throws IllegalArgumentException when precondition is violated
 	 */
-	public static void errorPopupGenerator(String unableMessage, String recommendationMessage, Exception exception) {
+	public static void errorPopupGenerator(String unableMessage, String recommendationMessage, Exception exception) throws IllegalArgumentException {
 		if (unableMessage == null || recommendationMessage == null || exception == null) {
 			throw new IllegalArgumentException("Improper popup input");
 		}
