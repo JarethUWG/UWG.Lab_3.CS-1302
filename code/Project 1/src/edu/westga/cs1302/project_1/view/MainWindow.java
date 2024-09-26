@@ -85,11 +85,7 @@ public class MainWindow {
 	    	} catch (NumberFormatException quantityError) {
     			Utility.errorPopupGenerator("Unable to set quantity: ", " Please add a whole positive number to the box.", quantityError);
 	    	} catch (IllegalArgumentException argumentError) {
-	    		if (Integer.parseInt(this.nextQuantity.getText()) < 0) {
-	    			Utility.errorPopupGenerator("Unable to set quantity: ", " Please add a whole positive number to the box.", argumentError);
-	    		} else if (Integer.parseInt(this.nextQuantity.getText()) > Integer.MAX_VALUE) {
-	    			Utility.errorPopupGenerator("Unable to set quantity: ", " Please add a smaller number to the box.", argumentError);
-	    		}
+	    		Utility.errorPopupGenerator("Unable to set quantity: ", " Please add a whole positive number to the box.", argumentError);
 	    	} catch (NullPointerException nullError) {
         		Utility.errorPopupGenerator("Unable to set quantity: \n", ".\n Please select a food to set the quantity of.", nullError);
 	    	} 

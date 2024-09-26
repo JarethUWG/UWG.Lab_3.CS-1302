@@ -33,7 +33,7 @@ public class Utility {
 	}
 	
 	/**
-	 * Generates formatted error popups depending up passed in error and strings.
+	 * Generates formatted error popups depending up passed in exception and strings.
 	 * 
 	 * @precondition unableMessage != null && recommendationMessage != null && exception != null
 	 * 
