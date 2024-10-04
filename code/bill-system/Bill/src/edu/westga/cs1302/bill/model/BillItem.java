@@ -11,7 +11,7 @@ public class BillItem {
 	
 	/** create anew bill item with the provided name and amount
 	 * 
-	 * @precondition name != null && !name.isEmpty() &&
+	 * @precondition name != null && !name.isEmpty() && !name.contain(",")
 	 * 				 amount >= 0.01
 	 * @postcondition getName() == name &&
 	 * 				  getAmount() == amount
@@ -25,6 +25,9 @@ public class BillItem {
 		}
 		if (name.isEmpty()) {
 			throw new IllegalArgumentException("name must not be empty.");
+		}
+		if (name.contains(",")) {
+			throw new IllegalArgumentException("name must not contain a comma");
 		}
 		if (amount < 0.01) {
 			throw new IllegalArgumentException("amount must be positive, but was " + amount);
