@@ -1,7 +1,11 @@
 package edu.westga.cs1302.bill.model;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /** Supports saving and loading bill data,
  * 
@@ -46,9 +50,46 @@ public class BillPersistenceManager {
 	 * @postcondition none
 	 * 
 	 * @return the bill loaded
+	 * @throws FileNotFoundException inputed file not found at location
+	 * @throws IOException formatting issues exist in inputed file
 	 */
-	public static Bill loadBillData() {
-		return null;
+	public static Bill loadBillData() throws FileNotFoundException, IOException {
+		File inputFile = new File(DATA_FILE);
+		String serverName = "PLACEHOLDER";
+		ArrayList<BillItem> items = new ArrayList<BillItem>();
+		try (Scanner reader = new Scanner(inputFile)) {
+			for (int currentIndex = 0; reader.hasNextLine(); currentIndex++) {
+				String baseLine = reader.nextLine();
+				String strippedLine = baseLine.strip();
+				String[] parts = strippedLine.split(",");
+				try {
+					if (currentIndex == 0) {
+						if (parts[0].isBlank() || parts[0] == null || parts[0].contains(",")) {
+							throw new IOException("Invalid or missing server name on line " + (currentIndex + 1));
+						} else {
+							serverName = parts[0];
+						}
+
+					} else {
+						double parsedCost = Double.parseDouble(parts[1]);
+						BillItem currentItem = new BillItem(parts[0], parsedCost);
+						items.add(currentItem);
+					}	
+				} catch (NumberFormatException numError) {
+					throw new IOException("Unable to read cost on line " + (currentIndex + 1));
+				} catch (IllegalArgumentException billDataError) {
+					throw new IOException("Invalid Bill information on line " + (currentIndex + 1));
+				} catch (IndexOutOfBoundsException fileFormatError) {
+					throw new IOException("Improper formatting of information on line " + (currentIndex + 1));
+				}
+			}
+		}
+		Bill loadedBill = new Bill();
+		for (BillItem item: items) {
+			loadedBill.addItem(item);
+		}
+		loadedBill.setServerName(serverName);
+		return loadedBill;
 	}
 
 }
