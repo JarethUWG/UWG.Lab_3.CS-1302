@@ -32,7 +32,7 @@ public class BillPersistenceManager {
 			throw new IllegalArgumentException("Must provide a valid bill");
 		}
 		try (FileWriter writer = new FileWriter(DATA_FILE)) {
-				writer.write(bill.getServerName() + "," + bill.getSize() + System.lineSeparator());
+				writer.write(bill.getServerName() + System.lineSeparator());
 			for (BillItem currentBillItem : bill.getItems()) {
 				if (currentBillItem != null) {
 					writer.write(currentBillItem.getName() + "," + currentBillItem.getAmount() + System.lineSeparator());
