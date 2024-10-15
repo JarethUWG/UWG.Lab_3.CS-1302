@@ -1,10 +1,15 @@
 package edu.westga.cs1302.bill.view;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 import edu.westga.cs1302.bill.model.Bill;
 import edu.westga.cs1302.bill.model.BillItem;
 import edu.westga.cs1302.bill.model.BillPersistenceManager;
+import edu.westga.cs1302.bill.model.CSVBillPersistenceManager;
+import edu.westga.cs1302.bill.model.TSVBillPersistenceManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -19,6 +24,7 @@ import javafx.scene.control.TextField;
  * @version Fall 2024
  */
 public class MainWindow {
+	public static final String DATA_FILE = "data.txt";
 	private Bill bill;
 
 	@FXML
@@ -29,6 +35,8 @@ public class MainWindow {
 	private TextArea receiptArea;
 	@FXML
 	private ComboBox<String> serverName;
+	@FXML
+    private ComboBox<BillPersistenceManager> format;
 
 	@FXML
 	void addItem(ActionEvent event) {
@@ -61,9 +69,11 @@ public class MainWindow {
 	@FXML
 	void saveBillData(ActionEvent event) {
 		try {
-			BillPersistenceManager.saveBillData(this.bill);
+			this.format.getValue().saveBillData(this.bill);
 		} catch (IOException writeError) {
-			this.displayErrorPopup("Unable to save data to file!");
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Unable to save data to file!");
+			alert.showAndWait();
 		}
 	}
 
@@ -78,7 +88,36 @@ public class MainWindow {
 		this.serverName.getItems().add("Bob");
 		this.serverName.getItems().add("Alice");
 		this.serverName.getItems().add("Trudy");
-		this.bill = BillPersistenceManager.loadBillData();
+		this.format.getItems().add(new CSVBillPersistenceManager());
+		this.format.getItems().add(new TSVBillPersistenceManager());
+		this.format.setValue(this.format.getItems().get(0));
+		File inputFile = new File(DATA_FILE);
+		this.bill = new Bill();
+		try (Scanner reader = new Scanner(inputFile)) {
+			String format = reader.nextLine();
+			if (format.equals("CSV")) {
+				CSVBillPersistenceManager loader = new CSVBillPersistenceManager();
+				Bill loadedBill = loader.loadBillData();
+				this.bill = loadedBill;
+			}
+			if (format.equals("TSV")) {
+				TSVBillPersistenceManager loader = new TSVBillPersistenceManager();
+				Bill loadedBill = loader.loadBillData();
+				this.bill = loadedBill;
+			}
+			if (this.bill.getItems().length == 0 && this.bill.getServerName().equals("No Server Set")) {
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				alert.setContentText("Save is not in a valid format. Loading without save data.");
+				alert.showAndWait();
+			}
+		} catch (FileNotFoundException noFileError) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setHeaderText("Save file not found.");
+			alert.setContentText(noFileError.getMessage() + ". Loading without data.");
+			alert.showAndWait();
+			this.bill = new Bill();
+		} 
+
 		this.updateReceipt();
 	}
 }
