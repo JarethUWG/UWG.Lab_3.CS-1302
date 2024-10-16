@@ -23,5 +23,8 @@
       <Line endX="28.0" endY="-152.0" layoutX="269.0" layoutY="160.0" startX="28.0" startY="-46.0" />
       <Label layoutX="313.0" layoutY="43.0" text="Save Format" />
       <ComboBox fx:id="format" layoutX="302.0" layoutY="63.0" prefHeight="26.0" prefWidth="88.0" />
+      <Label layoutX="320.0" layoutY="149.0" text="Order Bill" />
+      <Line endX="84.99996948242188" endY="0.5000152587890625" layoutX="313.0" layoutY="114.0" startX="-16.500030517578125" startY="0.5000152587890625" />
+      <ComboBox fx:id="order" layoutX="301.0" layoutY="167.0" onAction="#changeOrder" prefHeight="26.0" prefWidth="88.0" />
    </children>
 </AnchorPane>

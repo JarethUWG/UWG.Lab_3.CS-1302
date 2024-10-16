@@ -3,10 +3,14 @@ package edu.westga.cs1302.bill.view;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 import edu.westga.cs1302.bill.model.Bill;
 import edu.westga.cs1302.bill.model.BillItem;
+import edu.westga.cs1302.bill.model.BillItemAscendingCostComparator;
+import edu.westga.cs1302.bill.model.BillItemDescendingCostComparator;
 import edu.westga.cs1302.bill.model.BillPersistenceManager;
 import edu.westga.cs1302.bill.model.CSVBillPersistenceManager;
 import edu.westga.cs1302.bill.model.TSVBillPersistenceManager;
@@ -37,6 +41,8 @@ public class MainWindow {
 	private ComboBox<String> serverName;
 	@FXML
     private ComboBox<BillPersistenceManager> format;
+	@FXML
+    private ComboBox<Comparator<BillItem>> order;
 
 	@FXML
 	void addItem(ActionEvent event) {
@@ -82,6 +88,23 @@ public class MainWindow {
 		alert.setContentText(message);
 		alert.showAndWait();
 	}
+	
+	@FXML 
+	void changeOrder(ActionEvent event) {
+		this.bill.getItems();
+		ArrayList<BillItem> items = new ArrayList<BillItem>();
+		Bill nextBill = new Bill();
+		for (BillItem currentItem: this.bill.getItems()) {
+			items.add(currentItem);
+		}
+		items.sort(this.order.getValue());
+		for (BillItem currentItem: items) {
+			nextBill.addItem(currentItem);
+		}
+		nextBill.setServerName(this.bill.getServerName());
+		this.bill = nextBill;
+		this.updateReceipt();
+	}
 
 	@FXML
 	void initialize() {
@@ -91,6 +114,8 @@ public class MainWindow {
 		this.format.getItems().add(new CSVBillPersistenceManager());
 		this.format.getItems().add(new TSVBillPersistenceManager());
 		this.format.setValue(this.format.getItems().get(0));
+		this.order.getItems().add(new BillItemAscendingCostComparator());
+		this.order.getItems().add(new BillItemDescendingCostComparator());
 		File inputFile = new File(DATA_FILE);
 		this.bill = new Bill();
 		try (Scanner reader = new Scanner(inputFile)) {
