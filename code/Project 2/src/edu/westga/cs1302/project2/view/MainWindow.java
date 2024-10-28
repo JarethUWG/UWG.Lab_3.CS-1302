@@ -30,7 +30,8 @@ public class MainWindow {
 			this.ingredientsList.getItems().add(new Ingredient(this.ingredientName.getText(), this.ingredientType.getValue()));
 			this.ingredientName.clear();
 			this.ingredientType.getSelectionModel().clearSelection();
-			this.ingredientRefresher();
+			ActionEvent sort = new ActionEvent();
+			this.sortIngredient(sort);
 		} catch (IllegalArgumentException error) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setHeaderText("Unable to add ingredient");
@@ -45,15 +46,12 @@ public class MainWindow {
 		if (selectedIngredient != null) {
 			this.ingredientsList.getItems().remove(selectedIngredient);
 		}
-		this.ingredientRefresher();
+		ActionEvent sort = new ActionEvent();
+		this.sortIngredient(sort);
 	}
 	
 	@FXML
 	void sortIngredient(ActionEvent event) {
-		this.ingredientRefresher();
-	}
-	
-	private void ingredientRefresher() {
 		this.ingredientsList.getItems().sort(this.sortBy.getValue());
 	}
 	
