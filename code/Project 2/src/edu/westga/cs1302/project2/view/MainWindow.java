@@ -22,6 +22,9 @@ public class MainWindow {
 	@FXML private ComboBox<String> ingredientType;
 	@FXML private ComboBox<Comparator<Ingredient>> sortBy;
 	@FXML private ListView<Ingredient> ingredientsList;
+	@FXML private ListView<?> recipeIngredients;
+	@FXML private ListView<?> recipeStorage;
+	@FXML private TextField recipeName;
 	@FXML private TextField ingredientName;
 
 	@FXML
