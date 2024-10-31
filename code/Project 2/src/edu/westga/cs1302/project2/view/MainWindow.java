@@ -1,5 +1,6 @@
 package edu.westga.cs1302.project2.view;
 
+import java.io.IOException;
 import java.util.Comparator;
 
 import edu.westga.cs1302.project2.model.Ingredient;
@@ -10,6 +11,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import edu.westga.cs1302.project2.model.NameComparator;
+import edu.westga.cs1302.project2.model.Recipe;
+import edu.westga.cs1302.project2.model.RecipePersistenceManager;
 import edu.westga.cs1302.project2.model.TypeComparator;
 
 /**
@@ -22,7 +25,7 @@ public class MainWindow {
 	@FXML private ComboBox<String> ingredientType;
 	@FXML private ComboBox<Comparator<Ingredient>> sortBy;
 	@FXML private ListView<Ingredient> ingredientsList;
-	@FXML private ListView<?> recipeIngredients;
+	@FXML private ListView<Ingredient> recipeIngredients;
 	@FXML private TextField recipeName;
 	@FXML private TextField ingredientName;
 
@@ -55,6 +58,47 @@ public class MainWindow {
 	@FXML
 	void sortIngredient(ActionEvent event) {
 		this.ingredientsList.getItems().sort(this.sortBy.getValue());
+	}
+	
+	@FXML
+	void addRecipeIngredient(ActionEvent event) {
+		try {
+		if (this.ingredientsList.getSelectionModel().getSelectedItem() == null) {
+			throw new IllegalStateException("No ingredient selected.");
+		}
+		this.recipeIngredients.getItems().add(this.ingredientsList.getSelectionModel().getSelectedItem());
+		} catch (IllegalStateException noneSelected) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setHeaderText("Unable to add ingredient to recipe");
+			alert.setContentText(noneSelected.getMessage());
+			alert.showAndWait();
+		}
+	}
+	
+	@FXML
+	void saveRecipe(ActionEvent event) {
+		try {
+		Recipe nextRecipe = new Recipe(this.recipeName.getText(), this.recipeIngredients.getItems());
+		RecipePersistenceManager saver = new RecipePersistenceManager();
+		saver.saveRecipeData(nextRecipe);
+		} catch (IllegalArgumentException badInput) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setHeaderText("Unable to add recipe");
+			alert.setContentText(badInput.getMessage());
+			alert.showAndWait();
+		} catch (IOException writingError) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setHeaderText("Unable to add recipe");
+			alert.setContentText(writingError.getMessage());
+			alert.showAndWait();
+		} catch (IllegalStateException namingError) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setHeaderText("Unable to add recipe");
+			alert.setContentText(namingError.getMessage());
+			alert.showAndWait();
+		}
+		this.recipeIngredients.getItems().clear();
+		this.recipeName.clear();
 	}
 	
 	@FXML

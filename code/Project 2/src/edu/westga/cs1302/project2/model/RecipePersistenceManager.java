@@ -30,28 +30,34 @@ public class RecipePersistenceManager {
 		if (recipe == null) {
 			throw new IllegalArgumentException("Must provide a valid recipe");
 		}
-		boolean isSaveData = true;
-		try (FileWriter writer = new FileWriter(DATA_FILE)) {
-			File recipeFile = new File(DATA_FILE);
-			try (Scanner reader = new Scanner(recipeFile)) {
-				int iteration = 0;
-				while (reader.hasNextLine()) {
-					String currentLine = reader.nextLine();
-					if (iteration % 2 == 0) {
-						if (recipe.getName().equals(currentLine)) {
-							throw new IllegalStateException("Recipes in file cannot share names");
-						}
+		String oldData = "";
+		File recipeFile = new File(DATA_FILE);
+		try (Scanner reader = new Scanner(recipeFile)) {
+			int iteration = 0;
+			while (reader.hasNextLine()) {
+				String currentLine = reader.nextLine();
+				if (iteration % 2 == 0) {
+					if (recipe.getName().equals(currentLine)) {
+						throw new IllegalStateException("Recipes in file cannot share names");
 					}
-					iteration++;
 				}
-			} catch (FileNotFoundException noSaveData) {
-				writer.write(Utility.formatRecipe(recipe.getName(), recipe.getIngredients()) + System.lineSeparator());
-				isSaveData = false;
-			}
-			if (isSaveData) {
+				iteration++;
+			} 
+		} catch (FileNotFoundException noSave) {
+		}
+		try (Scanner reader = new Scanner(recipeFile)) {
+			while (reader.hasNextLine()) {
+				String currentLine = reader.nextLine();
+				oldData += currentLine + System.lineSeparator();
+				}
+		} catch (FileNotFoundException noSave) {
+		} 
+		
+		try (FileWriter writer = new FileWriter(DATA_FILE)) {
+			writer.write(oldData);
 			writer.write(Utility.formatRecipe(recipe.getName(), recipe.getIngredients()) + System.lineSeparator());
 			}
 		}
 		
-	}
 }
+

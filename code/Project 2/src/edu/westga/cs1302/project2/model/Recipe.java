@@ -50,8 +50,4 @@ public class Recipe {
 		return this.ingredients;
 	}
 	
-	@Override
-	public String toString() {
-		return Utility.formatRecipe(this.name, this.ingredients);
-	}
 }
