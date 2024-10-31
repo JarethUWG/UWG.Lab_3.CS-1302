@@ -11,7 +11,7 @@ import java.util.List;
 public class Utility {
 	
 	/**
-	 * Formats the toString for a recipe
+	 * Formats the information of a recipe to be saved as a CSV
 	 * 
 	 * @precondition name != null && !name.isEmpty() &&
 	 * 				 ingredients != null && !ingredients.isEmpty()
@@ -29,9 +29,9 @@ public class Utility {
 		String formattedString = name + System.lineSeparator();
 		for (int index = 0; index < ingredients.size(); index++) {
 			if (index == ingredients.size() - 1) {
-				formattedString += ingredients.get(index).getName();
+				formattedString += ingredients.get(index).getName() + "." + ingredients.get(index).getType();
 			} else {
-				formattedString += ingredients.get(index).getName() + ",";
+				formattedString += ingredients.get(index).getName() + "." + ingredients.get(index).getType() + ",";
 			}
 		}
 		return formattedString;
