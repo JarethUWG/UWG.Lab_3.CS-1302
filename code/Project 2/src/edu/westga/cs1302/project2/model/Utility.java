@@ -29,9 +29,9 @@ public class Utility {
 		String formattedString = name + System.lineSeparator();
 		for (int index = 0; index < ingredients.size(); index++) {
 			if (index == ingredients.size() - 1) {
-				formattedString += ingredients.get(index).getName() + "." + ingredients.get(index).getType();
+				formattedString += ingredients.get(index).getName() + "," + ingredients.get(index).getType();
 			} else {
-				formattedString += ingredients.get(index).getName() + "." + ingredients.get(index).getType() + ",";
+				formattedString += ingredients.get(index).getName() + "," + ingredients.get(index).getType() + ",";
 			}
 		}
 		return formattedString;

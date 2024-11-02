@@ -1,8 +1,0 @@
-Recipe 2
-Name.Vegetable,Name1.Meat
-Recipe
-Name.Spice
-Recipe3
-Name2.Bread,Name.Spice
-Salad
-NAME.Vegetable

@@ -14,6 +14,7 @@ import edu.westga.cs1302.project2.model.NameComparator;
 import edu.westga.cs1302.project2.model.Recipe;
 import edu.westga.cs1302.project2.model.RecipePersistenceManager;
 import edu.westga.cs1302.project2.model.TypeComparator;
+import edu.westga.cs1302.project2.model.Utility;
 
 /**
  * Codebehind for the Main Window of the application.
@@ -78,9 +79,9 @@ public class MainWindow {
 	@FXML
 	void saveRecipe(ActionEvent event) {
 		try {
-		Recipe nextRecipe = new Recipe(this.recipeName.getText(), this.recipeIngredients.getItems());
+		String formattedRecipe = Utility.formatRecipe(recipeName.getText(), recipeIngredients.getItems());
 		RecipePersistenceManager saver = new RecipePersistenceManager();
-		saver.saveRecipeData(nextRecipe);
+		saver.saveRecipeData(formattedRecipe);
 		} catch (IllegalArgumentException badInput) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setHeaderText("Unable to add recipe");

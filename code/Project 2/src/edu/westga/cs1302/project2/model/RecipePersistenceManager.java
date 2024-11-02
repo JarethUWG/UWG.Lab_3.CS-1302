@@ -26,36 +26,30 @@ public class RecipePersistenceManager {
 	 * @throws IllegalArgumentException if precondition is violated
 	 * @throws IllegalStateException if a recipe sharing the name of inputed recipe already exists.
 	 */
-	public void saveRecipeData(Recipe recipe) throws IOException, IllegalArgumentException, IllegalStateException {
+	public void saveRecipeData(String recipe) throws IOException, IllegalArgumentException, IllegalStateException {
 		if (recipe == null) {
 			throw new IllegalArgumentException("Must provide a valid recipe");
 		}
 		String oldData = "";
 		File recipeFile = new File(DATA_FILE);
 		try (Scanner reader = new Scanner(recipeFile)) {
+			String[] nameIngredientSpliter = recipe.split(System.lineSeparator());
 			int iteration = 0;
 			while (reader.hasNextLine()) {
 				String currentLine = reader.nextLine();
 				if (iteration % 2 == 0) {
-					if (recipe.getName().equals(currentLine)) {
+					if (nameIngredientSpliter[0].equals(currentLine)) {
 						throw new IllegalStateException("Recipes in file cannot share names");
 					}
 				}
+				oldData += currentLine + System.lineSeparator();
 				iteration++;
 			} 
 		} catch (FileNotFoundException noSave) {
 		}
-		try (Scanner reader = new Scanner(recipeFile)) {
-			while (reader.hasNextLine()) {
-				String currentLine = reader.nextLine();
-				oldData += currentLine + System.lineSeparator();
-				}
-		} catch (FileNotFoundException noSave) {
-		} 
-		
 		try (FileWriter writer = new FileWriter(DATA_FILE)) {
 			writer.write(oldData);
-			writer.write(Utility.formatRecipe(recipe.getName(), recipe.getIngredients()) + System.lineSeparator());
+			writer.write(recipe + System.lineSeparator());
 			}
 		}
 		
