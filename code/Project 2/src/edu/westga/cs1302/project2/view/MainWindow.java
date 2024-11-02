@@ -9,9 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import edu.westga.cs1302.project2.model.NameComparator;
-import edu.westga.cs1302.project2.model.Recipe;
 import edu.westga.cs1302.project2.model.RecipePersistenceManager;
 import edu.westga.cs1302.project2.model.TypeComparator;
 import edu.westga.cs1302.project2.model.Utility;
@@ -29,6 +29,7 @@ public class MainWindow {
 	@FXML private ListView<Ingredient> recipeIngredients;
 	@FXML private TextField recipeName;
 	@FXML private TextField ingredientName;
+	@FXML private TextArea recipeDisplay;
 
 	@FXML
 	void addIngredient(ActionEvent event) {
@@ -79,7 +80,7 @@ public class MainWindow {
 	@FXML
 	void saveRecipe(ActionEvent event) {
 		try {
-		String formattedRecipe = Utility.formatRecipe(recipeName.getText(), recipeIngredients.getItems());
+		String formattedRecipe = Utility.formatRecipe(this.recipeName.getText(), this.recipeIngredients.getItems());
 		RecipePersistenceManager saver = new RecipePersistenceManager();
 		saver.saveRecipeData(formattedRecipe);
 		} catch (IllegalArgumentException badInput) {
