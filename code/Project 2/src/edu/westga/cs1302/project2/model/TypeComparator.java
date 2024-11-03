@@ -24,7 +24,13 @@ public class TypeComparator implements Comparator<Ingredient> {
 		if (first == null || second == null) {
 			throw new IllegalArgumentException("Input ingredients cannot be null");
 		}
-		return first.getType().compareTo(second.getType());
+		if (first.getType().compareTo(second.getType()) < 0) {
+			return -1;
+		} else if (first.getType().compareTo(second.getType()) > 0) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 	
 	@Override

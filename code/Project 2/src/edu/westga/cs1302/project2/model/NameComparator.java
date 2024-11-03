@@ -24,7 +24,13 @@ public class NameComparator implements Comparator<Ingredient> {
 		if (first == null || second == null) {
 			throw new IllegalArgumentException("Input ingredients cannot be null");
 		}
-		return first.getName().compareTo(second.getName());
+		if (first.getName().compareTo(second.getName()) < 0) {
+			return -1;
+		} else if (first.getName().compareTo(second.getName()) > 0) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 	
 	@Override
