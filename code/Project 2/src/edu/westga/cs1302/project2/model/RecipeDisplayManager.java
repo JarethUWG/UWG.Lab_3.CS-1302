@@ -24,7 +24,7 @@ public class RecipeDisplayManager {
 	 * @postcondition none
 	 * 
 	 * @return list of recipes
-	 * @throws IOException formatting issues exist in accessed file
+	 * @throws IOException if formatting issues exist in accessed file
 	 */
 	public static List<Recipe> loadRecipes() throws IOException {
 		File inputFile = new File(DATA_FILE);
@@ -71,7 +71,7 @@ public class RecipeDisplayManager {
 	 * @param ingredient the ingredient that is being searched for in the recipes
 	 * 
 	 * @return list of recipes containing ingredient
-	 * @throws IOException formatting issues exist in accessed file
+	 * @throws IOException if formatting issues exist in accessed file
 	 */
 	public static List<Recipe> filterRecipes(Ingredient ingredient) throws IOException {
 		List<Recipe> filteredRecipes = new ArrayList<Recipe>();

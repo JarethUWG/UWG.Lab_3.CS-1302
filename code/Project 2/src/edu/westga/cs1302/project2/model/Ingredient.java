@@ -11,8 +11,8 @@ public class Ingredient {
 	
 	/** Create a new ingredient with the specified name and type
 	 * 
-	 * @precondition name != null && !name.isEmpty() &&
-	 * 				 type != null && !type.isEmpty()
+	 * @precondition name != null && !name.isEmpty() && !name.contains(",") &&
+	 * 				 type != null && !type.isEmpty() && !type.contains(",")
 	 * @postcondition getName() == name &&
 	 * 				  getType() == type
 	 * 
@@ -22,9 +22,15 @@ public class Ingredient {
 	public Ingredient(String name, String type) {
 		if (name == null || name.isEmpty()) {
 			throw new IllegalArgumentException("Must provide a valid name.");
+		} 
+		if (name.contains(",")) {
+			throw new IllegalArgumentException("Name cannot contain commas.");
 		}
 		if (type == null || type.isEmpty()) {
 			throw new IllegalArgumentException("Must provide a valid type.");
+		}
+		if (type.contains(",")) {
+			throw new IllegalArgumentException("Type cannot contain commas.");
 		}
 		this.name = name;
 		this.type = type;

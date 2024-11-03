@@ -17,7 +17,12 @@ class TestConstructor {
 	void testEmptyName() {
 		assertThrows(IllegalArgumentException.class, ()->{new Ingredient("", "b");});
 	}
-
+	
+	@Test
+	void testCommaName() {
+		assertThrows(IllegalArgumentException.class, ()->{new Ingredient(",", "b");});
+	}
+	
 	@Test
 	void testNullType() {
 		assertThrows(IllegalArgumentException.class, ()->{new Ingredient("a", null);});
@@ -26,6 +31,11 @@ class TestConstructor {
 	@Test
 	void testEmptyType() {
 		assertThrows(IllegalArgumentException.class, ()->{new Ingredient("a", "");});
+	}
+	
+	@Test
+	void testCommaType() {
+		assertThrows(IllegalArgumentException.class, ()->{new Ingredient("a", ",");});
 	}
 	
 	@Test

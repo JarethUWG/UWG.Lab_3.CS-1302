@@ -51,10 +51,17 @@ public class Utility {
 		}
 		String formattedString = "";
 		for (int index = 0; index < recipes.size(); index++) {
-			if (index == recipes.size() - 1) {
-				formattedString += recipes.get(index).getName();
-			} else {
-				formattedString += recipes.get(index).getName() + System.lineSeparator() + System.lineSeparator();
+			formattedString += recipes.get(index).getName() + System.lineSeparator();
+			int ingredientSize =  recipes.get(index).getIngredients().size();
+			for (int ingredientSorter = 0; ingredientSorter < ingredientSize; ingredientSorter++) {
+				if (ingredientSorter == ingredientSize - 1) {
+					formattedString += recipes.get(index).getIngredients().get(ingredientSorter);
+				} else {
+					formattedString += recipes.get(index).getIngredients().get(ingredientSorter) + "," + " ";
+				}
+			}
+			if (index < recipes.size() - 1) {
+				formattedString += System.lineSeparator() + System.lineSeparator();
 			}
 		}
 		return formattedString;
