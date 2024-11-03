@@ -17,7 +17,7 @@ public class Utility {
 	 * 				 ingredients != null && !ingredients.isEmpty()
 	 * @param name the name of the recipe
 	 * @param ingredients the ingredients for the recipe
-	 * @return a formatted toString for a recipe
+	 * @return a formatted string for a recipe
 	 */
 	public static String formatRecipe(String name, List<Ingredient> ingredients) {
 		if (name == null || name.isEmpty()) {
@@ -32,6 +32,29 @@ public class Utility {
 				formattedString += ingredients.get(index).getName() + "," + ingredients.get(index).getType();
 			} else {
 				formattedString += ingredients.get(index).getName() + "," + ingredients.get(index).getType() + ",";
+			}
+		}
+		return formattedString;
+	}
+	
+	/**
+	 * Formats the information of a recipes to be displayed as a String
+	 * 
+	 * @precondition name != null 
+	 * 
+	 * @param recipes the recipes to be formatted
+	 * @return a formatted string for a list of recipes
+	 */
+	public static String formatDisplayRecipes(List<Recipe> recipes) {
+		if (recipes == null) {
+			throw new IllegalArgumentException("Must provide a list of recipes");
+		}
+		String formattedString = "";
+		for (int index = 0; index < recipes.size(); index++) {
+			if (index == recipes.size() - 1) {
+				formattedString += recipes.get(index).getName();
+			} else {
+				formattedString += recipes.get(index).getName() + System.lineSeparator();
 			}
 		}
 		return formattedString;
