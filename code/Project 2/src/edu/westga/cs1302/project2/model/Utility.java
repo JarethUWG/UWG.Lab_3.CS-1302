@@ -54,7 +54,7 @@ public class Utility {
 			if (index == recipes.size() - 1) {
 				formattedString += recipes.get(index).getName();
 			} else {
-				formattedString += recipes.get(index).getName() + System.lineSeparator();
+				formattedString += recipes.get(index).getName() + System.lineSeparator() + System.lineSeparator();
 			}
 		}
 		return formattedString;

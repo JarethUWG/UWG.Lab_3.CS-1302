@@ -29,6 +29,6 @@
       <TextField fx:id="recipeName" layoutX="262.0" layoutY="100.0" />
       <Label layoutX="301.0" layoutY="83.0" text="Recipe Name" />
       <TextArea fx:id="recipeDisplay" layoutX="437.0" layoutY="178.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button layoutX="488.0" layoutY="145.0" mnemonicParsing="false" text="Display Recipes" />
+      <Button layoutX="488.0" layoutY="145.0" mnemonicParsing="false" onAction="#displayRecipes" text="Display Recipes" />
    </children>
 </AnchorPane>

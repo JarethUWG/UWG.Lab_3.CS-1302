@@ -2,6 +2,7 @@ package edu.westga.cs1302.project2.view;
 
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.List;
 
 import edu.westga.cs1302.project2.model.Ingredient;
 import javafx.event.ActionEvent;
@@ -12,6 +13,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import edu.westga.cs1302.project2.model.NameComparator;
+import edu.westga.cs1302.project2.model.Recipe;
+import edu.westga.cs1302.project2.model.RecipeDisplayManager;
 import edu.westga.cs1302.project2.model.RecipePersistenceManager;
 import edu.westga.cs1302.project2.model.TypeComparator;
 import edu.westga.cs1302.project2.model.Utility;
@@ -101,6 +104,30 @@ public class MainWindow {
 		}
 		this.recipeIngredients.getItems().clear();
 		this.recipeName.clear();
+	}
+	
+	@FXML
+	void displayRecipes(ActionEvent event) {
+		try {
+			Ingredient filterIngredient = this.ingredientsList.getSelectionModel().getSelectedItem();
+			if (filterIngredient == null) {
+				throw new IllegalStateException("No ingredient selected.");
+			}	
+			List<Recipe> filteredRecipes = RecipeDisplayManager.filterRecipes(filterIngredient);
+			String displayText = Utility.formatDisplayRecipes(filteredRecipes);
+			this.recipeDisplay.setText(displayText);
+		} catch (IllegalStateException noneSelected) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setHeaderText("Unable to display recipes");
+			alert.setContentText(noneSelected.getMessage());
+			alert.showAndWait();
+		} catch (IOException loadingError) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setHeaderText("Unable to display recipes");
+			alert.setContentText(loadingError.getMessage());
+			alert.showAndWait();
+		}
+		
 	}
 	
 	@FXML

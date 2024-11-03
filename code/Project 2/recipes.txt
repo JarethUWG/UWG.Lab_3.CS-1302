@@ -1,0 +1,12 @@
+Toast
+Rye,Bread
+Fruit
+Apple,Fruit
+Steamed Hams
+Ham,Meat
+Grilled Tomato
+Tomato,Vegetable
+Ham-Tomato Sandwich
+Rye,Bread,Ham,Meat,Tomato,Vegetable
+Fruit salad
+Apple,Fruit
