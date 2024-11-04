@@ -57,7 +57,7 @@ public class Utility {
 				if (ingredientSorter == ingredientSize - 1) {
 					formattedString += recipes.get(index).getIngredients().get(ingredientSorter);
 				} else {
-					formattedString += recipes.get(index).getIngredients().get(ingredientSorter) + "," + " ";
+					formattedString += recipes.get(index).getIngredients().get(ingredientSorter) + ", ";
 				}
 			}
 			if (index < recipes.size() - 1) {
