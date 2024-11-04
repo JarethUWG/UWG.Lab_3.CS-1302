@@ -26,7 +26,7 @@ public class RecipePersistenceManager {
 	 * @throws IllegalArgumentException if precondition is violated
 	 * @throws IllegalStateException if a recipe sharing the name of inputed recipe already exists.
 	 */
-	public void saveRecipeData(String recipe) throws IOException, IllegalArgumentException, IllegalStateException {
+	public static void saveRecipeData(String recipe) throws IOException, IllegalArgumentException, IllegalStateException {
 		if (recipe == null) {
 			throw new IllegalArgumentException("Must provide a valid recipe");
 		}

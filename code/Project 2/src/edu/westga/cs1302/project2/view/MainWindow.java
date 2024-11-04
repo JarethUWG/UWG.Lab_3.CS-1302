@@ -84,8 +84,7 @@ public class MainWindow {
 	void saveRecipe(ActionEvent event) {
 		try {
 		String formattedRecipe = Utility.formatRecipe(this.recipeName.getText(), this.recipeIngredients.getItems());
-		RecipePersistenceManager saver = new RecipePersistenceManager();
-		saver.saveRecipeData(formattedRecipe);
+		RecipePersistenceManager.saveRecipeData(formattedRecipe);
 		} catch (IllegalArgumentException badInput) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setHeaderText("Unable to add recipe");
