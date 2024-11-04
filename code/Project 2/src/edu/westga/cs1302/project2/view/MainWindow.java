@@ -113,7 +113,8 @@ public class MainWindow {
 			if (filterIngredient == null) {
 				throw new IllegalStateException("No ingredient selected.");
 			}	
-			List<Recipe> filteredRecipes = RecipeDisplayManager.filterRecipes(filterIngredient);
+			List<Recipe> allRecipes = RecipeDisplayManager.loadRecipes();
+			List<Recipe> filteredRecipes = RecipeDisplayManager.filterRecipes(allRecipes, filterIngredient);
 			String displayText = Utility.formatDisplayRecipes(filteredRecipes);
 			this.recipeDisplay.setText(displayText);
 		} catch (IllegalStateException noneSelected) {

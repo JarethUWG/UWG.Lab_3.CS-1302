@@ -69,13 +69,18 @@ public class RecipeDisplayManager {
 	 * @postcondition none
 	 * 
 	 * @param ingredient the ingredient that is being searched for in the recipes
+	 * @param allRecipes all recipes from a given file
 	 * 
 	 * @return list of recipes containing ingredient
-	 * @throws IOException if formatting issues exist in accessed file
 	 */
-	public static List<Recipe> filterRecipes(Ingredient ingredient) throws IOException {
+	public static List<Recipe> filterRecipes(List<Recipe> allRecipes, Ingredient ingredient) {
+		if (allRecipes == null) {
+			throw new IllegalArgumentException("Inputted recipes must not be null");
+		} 
+		if (ingredient == null) {
+			throw new IllegalArgumentException("Inputted ingredient must not be null");
+		}
 		List<Recipe> filteredRecipes = new ArrayList<Recipe>();
-		List<Recipe> allRecipes = RecipeDisplayManager.loadRecipes();
 		for (Recipe currentRecipe: allRecipes) {
 			boolean matchingIngredient = false;
 			for (Ingredient currentIgredient: currentRecipe.getIngredients()) {

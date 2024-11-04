@@ -1,6 +1,0 @@
-Meatsac
-Name2,Meat
-Salad
-Name1,Vegetable
-Meaty stew
-Name2,Meat,Name1,Vegetable
