@@ -1,0 +1,538 @@
+commit e46b965e094422f8dce491afd501d29c7cd92992
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sun Nov 3 22:49:26 2024 -0500
+
+    Tested RecipePercisistenceManager
+    
+    Tested all non-trivial methods in RecipePersistenceManager. Test for IOException was ommited as no method was found to make the file unwritible.
+
+commit fb0471d0079f5059352db3b733cf5832f6bf36e7
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sun Nov 3 20:39:09 2024 -0500
+
+    Tested RecipeDisplayManager
+    
+    Tested all non-trivial methods for RecipeDisplayManager. Modifications were made to filterRecipes to better comply with project instructions
+
+commit 01abd45f2b40f2f511dd4503b148ea6895d8dd48
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sun Nov 3 19:14:17 2024 -0500
+
+    Tested Utility
+    
+    Tested non-Trivial methods of Utility. Today it was learned if you use an object as a string its toString is automatically used.
+
+commit 9441b782d4e69396100017b9fe69881fc3e70d91
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sun Nov 3 18:14:24 2024 -0500
+
+    Tested Comparators
+    
+    Added tests for all non-trivial methods in TypeComparator and NameComparator. Addtionally fixed both comparators returning integers other than 1, 0 and, -1.
+
+commit a0b0b583f2348e4b111c54faea3df7fcb2b3989f
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sun Nov 3 17:25:36 2024 -0500
+
+    Tested Recipe
+    
+    Tests were added for non-trivial methods of Recipe.
+
+commit ad6ed25ed8f603f0f7b863f67645c6207451e3f2
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sun Nov 3 17:09:03 2024 -0500
+
+    General Clean Up on Project 2
+    
+    Preformed general clean up on Project 2 mostly in reworking the recipe display to show ingredients as well and changing ingredients perconditions to prevent issues with saving as CSV.
+
+commit edc7d0599fb0c264abd64ca1d5d86cb6c2125cd2
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sun Nov 3 11:19:12 2024 -0500
+
+    Connect GUI to Business Logic to Display Avaiable Recipes
+    
+    Functionctionality has been given to the GUI allowing the user to display avaiable recipes of a given ingredient via selecting the ingredient and pressing a button. Slight modification made to Utility for proper displaying of recipes.
+
+commit d7c9e84904dfa9a62570646d6c6d2c788a75be54
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sat Nov 2 21:19:52 2024 -0400
+
+    Updated Business Logic to Display Available Recipes
+    
+    Added logic to allow for recipes to be loaded in and filtered via ingredients. Note further testing will be needed to confirm functionality of new methods.
+
+commit 5f1b7d011a0d645abbdecac160e12de3ca9f97ba
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sat Nov 2 19:47:14 2024 -0400
+
+    Update GUI to Display Avaliable Recipes
+    
+    Updated GUI to be able to Display Recipes in the TextArea when the Button above it is pressed. Functionality will be added in further commits.
+
+commit 15c08cb808f76ffd1a6812a7d49155f30b353bb9
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sat Nov 2 19:29:54 2024 -0400
+
+    Reworked Save Recipe Data
+    
+    Reworked save recipe data to be less bloated and reworked related files to more closely match instructions,
+
+commit 785dcd308c3fcfbb2c20e7669302d16b77a3f217
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Thu Oct 31 18:37:04 2024 -0400
+
+    Connect GUI to Business Logic to Add Recipe
+    
+    Implemented connection between GUI and Business Logic to allow for recipes to be created and saved. Heavy modification was needed in saveRecipeData to prevent overwriting old data on save.
+
+commit 912db94d1b8d51eb369e014463ebf232052c9973
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Thu Oct 31 17:06:09 2024 -0400
+
+    Removed Unneeded Parts for Add Recipe
+    
+    Removed an unneeded ListView and all components associated. Also revised utility to be utilized solely for information storage rather than use in toString for recipes.
+
+commit 52e78e0bda47c3441910b2d85f40034e28eeadbd
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Oct 30 18:41:52 2024 -0400
+
+    Update Business Logic to Add Recipe
+    
+    Implemented business logic to store information to a recipe and save recipes to a text file as a CSV.
+
+commit 2c4a46b63f649e5a59177081d588abb4d8e184f7
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Oct 30 16:20:32 2024 -0400
+
+    Update Gui to Add Recipe
+    
+    Modified GUI to be able to manage recipes.
+
+commit 78c894007afafafca382fd1b6c3a45d903e57968
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Mon Oct 28 18:20:46 2024 -0400
+
+    Fix Sort By Type or Name
+    
+    Fixed bug which caused NameComparator to compare by type, and changed method calls to remove the need for ingredientRefesher to minimize non-FXML code in MainWindow.
+
+commit d5b7296848c70aa914f2a486e7b7851b110b6200
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Mon Oct 28 17:58:21 2024 -0400
+
+    Connect GUI to Business Logic to Sort By Type or Name
+    
+    Connected the business logic to GUI for sorting ingredients to allow for a user to choose to sort either by type or name, defaulting to type.
+    Note a bug was spotted that cause both sorting methods to sort via type this will be patched in a dedicated debug branch.
+
+commit 3d08f3dbe2a95bb7faf0414bfc4ef921bd2c8e24
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Mon Oct 28 17:22:21 2024 -0400
+
+    Business Logic to Sort By Type or Name
+    
+    Implemented Comparators to sort Ingredient objects by Type or Name.
+
+commit 2084c8bac90012937c4bd51a630757a67c302f80
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Mon Oct 28 16:38:46 2024 -0400
+
+    Added GUI to Sort By Type or Name
+    
+    Added a combo box and label to GUI which will be utilized later to allow for the sorting of the foods.
+
+commit 91153999f49f440a90355784f4106572b673ccb1
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Mon Oct 28 16:20:09 2024 -0400
+
+    Initial Project 2 import
+    
+    Project 2 has been added to code folder for further modification.
+
+commit 47f764956bb1a2745fcb0c1a822269906ee390f8
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Oct 16 23:15:59 2024 -0400
+
+    Added GitHub Files
+    
+    Added githublink.txt that contains a url to remote repository and log.txt that includes all commits to date except for this one.
+
+commit f6c1ae38139a8397e46614cf74ca84c85054f2b6
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Oct 16 10:41:41 2024 -0400
+
+    Support Sorting Bill Items by Cost
+    
+    Added a means by which to sort the bill items by either ascending or descending order based on cost.
+
+commit ed124e974add6093fadbf274948194654abf5d74
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Tue Oct 15 18:45:25 2024 -0400
+
+    Support Multiple Formats
+    
+    Added a means to choose to save a bill as either a CSV or TSV and be able to load formatted information from either.
+
+commit 4cfc2c36ccc3a94f44e8b7aa1240bf948aee7223
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Thu Oct 10 15:32:01 2024 -0400
+
+    Initial import for lab 6
+    
+    Starter folder for lab 6 has been placed in code folder for further modification.
+
+commit 9eb873e0dea68f304ff013b644f26720b7ece44e
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sun Oct 6 22:07:40 2024 -0400
+
+    Added GitHub Link
+    
+    Added GitHub Link to remote repository in the project,
+
+commit e325e699a0687e49ed25cd857e30fb1fa23b5e27
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sun Oct 6 22:00:14 2024 -0400
+
+    Tested loadBillData
+    
+    Added tests for loadBillData to ensure functionality. Tests for IOExceptions not included due to requiring incorrect formatting that saveBillData cannot generate.
+
+commit 6f6b3abadc8f24c42b066426e252a5d2ac613083
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sun Oct 6 21:07:24 2024 -0400
+
+    Tested saveBillData
+    
+    Tested multiple cases saveBillData may be called in. Size was removed from saveBillData information as it was never used on loading.
+
+commit 99987ff179753dfc51e45b7eec459f38856bf86e
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sun Oct 6 16:06:20 2024 -0400
+
+    Load Bill Data
+    
+    Due to lack of a load button data is loaded from save data on startup if there is a save file and its data is properly formatted.
+
+commit 97250125f6d9d650cdeff63b717ebdf6b2093e62
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Fri Oct 4 17:41:08 2024 -0400
+
+    Save Bill Data
+    
+    Added the ability to save the data of a bill in a txt file with values seperated by commas. Minor modifications were made to BillItem constructor to prevent errors from misplaced commas.
+
+commit 141778c5e96569028b48e53df30b802f6f1af49b
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Fri Oct 4 16:41:03 2024 -0400
+
+    Seperated Bill Projects
+    
+    Due to issues with loading in the Lab 5 project due to there already being a project named Bill in the repository the Lab 5 assignment has been renamed BillSystem.
+
+commit d4673717cb2ca74d960e01ca9cfb8aff24ecccfa
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Fri Oct 4 16:09:46 2024 -0400
+
+    Initial import for Lab 5
+    
+    bill-system added for further modification for Lab 5
+
+commit 5226f0138eb0a826eb0ca845a9d83e5929fd3816
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Thu Sep 26 00:10:51 2024 -0400
+
+    Added git related files to project
+    
+    Added githublink.txt which provides a link to the github repository and added log.txt which currently shows all commits prior to this one.
+
+commit e0de4eec011b801783b2a0be99f4956bd13574ab
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 25 23:53:12 2024 -0400
+
+    Improved documentation
+    
+    Added @throws in both method headers and javadocs where applicable for better documentation. Changed a few author tags to Jareth Batty as while the base sample was made by CS 1302 the rest of the project was made by Jareth Batty and thus it is more accurate to place him as the author. The sole exception to this is main which remains relativly intact from initial import thus the author remains the same.
+
+commit dc74c6a3c57ab722425dafe7e4b1d7782c94c3bc
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 25 23:28:50 2024 -0400
+
+    Cleaned catches
+    
+    Removed unnecessary catch in set food as the error it was meant to catch had already been removed.
+
+commit d703cd042b9f7cac8fe04db6f0b8e02fd17ce0db
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 25 23:13:57 2024 -0400
+
+    Test and debugging for Utility
+    
+    Only limited testing was possible due to both utilites interacting with UI componets in some way. IllegalArgumentExceptions added to both utility methods to protect against improper use in alternative implementations. Minor corrections to java docs for better discription in fuction.
+
+commit 450b37b91a12c6b7dca3eb27965e75632ac6f0e1
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 25 18:48:15 2024 -0400
+
+    Tested and debugged food
+    
+    Tests were added for non-trivial methods in Food. toString was considered a trivial method and thus did not get a test. setNextQuantity had its upper bound removed due to being unused due to integer overflow. Correction was made to decrementQuantity exception message for more accurate error popups.
+
+commit 7f8d5d59c2ee8e259433b05a9c45e31b46eb3f2a
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 25 17:33:15 2024 -0400
+
+    Centralized Errors in Project
+    
+    Added a static method in Utility to minimize the amount of repetition in MainWindow error popups. RemoveFood() was unchanged due to not catching the exception like other methods thus not fitting the format.
+
+commit 2f77ea44cdfa590bd8d4f6347527d2bc066934de
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 25 16:32:55 2024 -0400
+
+    Connected Logic and UI for Counting Food in Pantry
+    
+    Users can now press the Count Foods button in UI to get a count of all quantities of all foods in the pantry.
+
+commit cec414739f5e9f61786db75198030002b600852b
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 25 16:12:55 2024 -0400
+
+    Business Logic for Counting Pantry
+    
+    Made a static method to handle the logic for counting quantities of food from input in UI.
+
+commit 684e6098c61fbefe16802d3bfbe09a24078f72cc
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Tue Sep 24 22:43:42 2024 -0400
+
+    Implemented UI For Counting Pantry
+    
+    Added a button which will be used to get the sum of all quantities of food in the pantry.
+
+commit 94e0aae46401a6a7ccf91d4f9e2d29c7585c3cb1
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Tue Sep 24 22:27:41 2024 -0400
+
+    Implement UI for Removing Food
+    
+    Users are now able to use the minus button to remove a selected food from the pantry.
+
+commit 74dde9b9a4219f210dc24db5f7ed61d32b560585
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Tue Sep 24 22:17:27 2024 -0400
+
+    Ui for removing food
+    
+    Added the button which will be used to remove a food.
+
+commit 0d84b7281a1e6aa5b15adc0da28b18ecf5902c69
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Tue Sep 24 21:56:55 2024 -0400
+
+    Connected Logic and UI for Updating Quantites of Food
+    
+    Users can now use the UI to modify the quantities of foods and have the view for them update with each alteration. Potental modifications may need to be made for unnecessary exceptions.
+
+commit a38c4b03c757c86707bf4c9452ea8f187f61be83
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Tue Sep 24 16:54:53 2024 -0400
+
+    Business Logic for Updating Quantity of Food in Pantry
+    
+    Added methods in Food data class to allow for various changes in the quantity value of food. Methods will be integtrated with UI later to display new quantities to user.
+
+commit 865f4350d06cde88fd39f65a8249af79ad2b921e
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Tue Sep 24 13:59:19 2024 -0400
+
+    Removed redundant folder
+    
+    Noticed an unnecessary folder between Project 1 and the java project itself. Removed to minimize confusion.
+
+commit c2644dcc53b3c4d19ced35be4be5cbf2d21f7613
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Tue Sep 24 13:31:46 2024 -0400
+
+    Implemented UI for updating quantity of food in pantry
+    
+    Added a user interface which will be connected with methods in the Food data class to allow for changes to the quantity of a given food.
+
+commit 5579ff64c2987e74e8d63495091bfed665df6b34
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Tue Sep 24 12:58:29 2024 -0400
+
+    Improved instruction accuracy in Food
+    
+    A misunderstanding in part 1B of the instructions resulted in me adding a method to change quantity rather than just making name and type final. This has been corrected.
+
+commit da74831a6e357a147f1668710119dcd43a5e9809
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Mon Sep 23 18:44:28 2024 -0400
+
+    Connect UI to Business Logic for Adding Food
+    
+    Connected UI to the Food data class to allow for foods to be created and seen in the list view.
+
+commit 01d742f6625e51dc81a7f733879248aad30bf058
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sun Sep 22 20:28:56 2024 -0400
+
+    Business Logic for Storing a Food
+    
+    Added the data class which stores food items to be integrated with the UI.
+
+commit 39b900bad5eb9c1283b20d319244719e43d10843
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sun Sep 22 19:43:11 2024 -0400
+
+    UI For Adding Food
+    
+    Set the basic UI for adding food to the project which will be associated with a data class later on.
+
+commit 896d66f4c50dfb5422fb2c128801324682807a99
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Sun Sep 22 19:12:28 2024 -0400
+
+    Initial addition of project 1
+    
+    Added base for project 1 to code folder to begin initial development.
+
+commit c305fdc7656e2efb3f94ad8794fa9fafbae1fdcf
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 18 23:28:18 2024 -0400
+
+    Removed Duplicate Project
+    
+    A duplicate of CourseManagementSystem was spotted outside of code folder and was removed to minimize any potental issues it may be causing.
+
+commit f9b12668c3d4ca368b395588bb381ac24786d5ed
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 18 22:48:05 2024 -0400
+
+    Added Additional GitHub Link
+    
+    Unsure if required due to a link existing in CourseManagement but in accordance with the instructions another GitHub link has been added to the project.
+
+commit d69559fb00133784acc458858ed9e07f87c67844
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 18 22:41:16 2024 -0400
+
+    Tested Calculations
+    
+    Added tests to confirm the functionality of calculations.
+
+commit 08737da7d57187e3cb755517946e5503323dc390
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 18 18:32:36 2024 -0400
+
+    Moved and Made Caculations Static
+    
+    Moved calculations to BillCalculator to seperate the concerns off of Bill item.
+    Changed calculations to static to make them usable without needing to create a new Bill object.
+    Made appropriate changes to other locations to accommodate changes made to the calculations.
+
+commit 58f28a3c56ae47cf22c9429543d7b67c784b3b79
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Thu Sep 12 16:11:42 2024 -0400
+
+    Made BillItem safer
+    
+    1) Made instance variables in BillItem final to make them unable to be edited after the constructor is called making them more secure
+
+commit 14bb046089393b55eb4c19eb39dcf28278b67bdc
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Thu Sep 12 15:40:19 2024 -0400
+
+    Added bill project
+    
+    1) added the bill project to current lab
+
+commit 68e3c4b20bee71826122e658f04fd69798a2f163
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 11 23:06:03 2024 -0400
+
+    Added GitHub link to project
+    
+    1) Added GitHub link to project in a txt file at the bottom of the project folder
+
+commit b4cbe6edbcc74751c689b7786ca0aeb5f4fc6acf
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 11 22:48:51 2024 -0400
+
+    Updated Student constructor tests
+    
+    1) Updated prexisting tests to check for correct grade
+    2) Added tests to ensure grade ranges were enforced
+    3) Minor update to inaccurate javadoc within Student
+
+commit 7e0fe46377076b4f7fc04d3134be6871e8b691a4
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 11 22:17:38 2024 -0400
+
+    Finished catches for exceptions on addStudent
+    
+    1) Added additional error messages to account for all situations
+    2) Edited existing errors to avoid inaccurate or incorrect error messages
+
+commit 065f7579a1a16bc79c16305796b727e9ae8f121e
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 11 19:12:52 2024 -0400
+
+    Partly added catches for exceptions to addStudent
+    
+    1) Added catches for exceptions in addStudent but further testing is required to ensure all exceptions were caught and dealt with properly
+
+commit 75d0a875a88c2a42590884b7a777a75b41897cde
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Wed Sep 11 18:23:26 2024 -0400
+
+    Added displayAverageGrade
+    
+    1) Added displayAverageGrade to passively show the average grade of all students as students are added and removed
+
+commit 830f8138f3d76ec599944df103308e66b788beb6
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Tue Sep 10 18:34:41 2024 -0400
+
+    Added showGrade
+    
+    1) Added showGrade method into MainWindow class
+    2) Added a button which calls showGrade in GUI
+    3) Fixed student constructor not modifiying this.grade and allowing grades over 100
+
+commit fee815d4c70a5176d213a3702d3d8983c4c0caf8
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Tue Sep 10 18:00:19 2024 -0400
+
+    Added grade to student
+    
+    1) Added instance variable grade to student class
+    2) Made appropriate changes to the methods of student to account for grade
+    3) Updated calls to student constructor to include grade
+    4) Added additional text field to GUI to allow for a grade to be passed in
+
+commit 3a052411987f367fe3ca3f0ac02d5594765ac349
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Mon Sep 9 16:36:42 2024 -0400
+
+    Implemented removeStudent
+    
+    1) Added functionality to the removeStudent method
+    2) Added a pop-up to notify the user when no students are selected
+
+commit ca40e67a34c4b566f2015467162416a8de05af77
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Mon Sep 9 16:16:50 2024 -0400
+
+    Added project to git repository
+    
+    1) Added CourseManagementSystem into the repository
+    2) Modified checkstyle to CS 1302 format
+
+commit 6c032c3b7a6513ca9ada86a607e108e7d00c813e
+Author: JarethUWG <jbatty1@my.westga.edu>
+Date:   Mon Sep 9 15:52:36 2024 -0400
+
+    Initial commit
