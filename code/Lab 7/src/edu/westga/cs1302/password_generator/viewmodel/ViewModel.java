@@ -1,5 +1,7 @@
 package edu.westga.cs1302.password_generator.viewmodel;
 
+import java.util.Random;
+
 import edu.westga.cs1302.password_generator.model.PasswordGenerator;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -22,7 +24,7 @@ public class ViewModel {
 	private PasswordGenerator generator;
 
 	/**
-	 * Instantiates a new student info view model.
+	 * Instantiates a new MainWindow view model.
 	 */
 	public ViewModel() {
 		this.digitsProperty = new SimpleBooleanProperty();
@@ -30,6 +32,8 @@ public class ViewModel {
 		this.upperProperty = new SimpleBooleanProperty();
 		this.lengthProperty = new SimpleStringProperty();
 		this.outputProperty = new SimpleStringProperty();
+		Random randomNumberGenerator = new Random();
+        this.generator = new PasswordGenerator(randomNumberGenerator.nextLong());
 	}
 
 	/**
@@ -37,7 +41,7 @@ public class ViewModel {
 	 *
 	 * @return the digitsProperty
 	 */
-	public BooleanProperty nameProperty() {
+	public BooleanProperty digitsProperty() {
 		return this.digitsProperty;
 	}
 
@@ -66,6 +70,15 @@ public class ViewModel {
 	 */
 	public StringProperty lengthProperty() {
 		return this.lengthProperty;
+	}
+	
+	/**
+	 * Gets the output property.
+	 *
+	 * @return the outputProperty
+	 */
+	public StringProperty outputProperty() {
+		return this.outputProperty;
 	}
 
 	/**

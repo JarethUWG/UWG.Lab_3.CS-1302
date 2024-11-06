@@ -154,7 +154,6 @@ public class PasswordGenerator {
 	 */
 	public String generatePassword() {
 		ArrayList<Character> passwordCharacters = new ArrayList<Character>();
-
 		if (this.mustHaveAtLeastOneDigit) {
 			passwordCharacters = this.addDigits(passwordCharacters);
 		}
