@@ -51,7 +51,7 @@ public class MainWindow {
 	}
     
     @FXML
-	private void handleGeneratePassward() {
+	private void handleGeneratePassword() {
 		this.viewModel.viewModelGeneratePassword();
 	}
 }
