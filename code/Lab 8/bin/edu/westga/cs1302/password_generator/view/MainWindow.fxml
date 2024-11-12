@@ -17,6 +17,6 @@
       <TextField fx:id="minimumLength" layoutX="116.0" layoutY="14.0" prefHeight="25.0" prefWidth="41.0" />
       <TextArea fx:id="output" editable="false" layoutX="11.0" layoutY="177.0" prefHeight="169.0" prefWidth="193.0" wrapText="true" />
       <Label fx:id="errorTextLabel" layoutX="65.0" layoutY="161.0" text="errorTextLabel" textFill="RED" />
-      <Label fx:id="lengthError" layoutX="13.0" layoutY="40.0" prefHeight="18.0" prefWidth="178.0" text="Please input a number &gt; 0" textFill="RED" />
+      <Label fx:id="lengthError" layoutX="13.0" layoutY="40.0" prefHeight="18.0" prefWidth="178.0" text="Please input a whole number &gt; 0" textFill="RED" />
    </children>
 </AnchorPane>

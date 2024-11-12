@@ -49,7 +49,6 @@ public class MainWindow {
 		this.minimumLength.textProperty().addListener((observable, oldValue, newValue) -> {
 				if (newValue.matches("\\d*\\D+\\d*") || newValue.matches("0\\d*")) {
 					this.minimumLength.setText(oldValue);
-					System.out.print("Triggered");
 					this.lengthError.setVisible(true);
 				} else {
 					this.lengthError.setVisible(false);
