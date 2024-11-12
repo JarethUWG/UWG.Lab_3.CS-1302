@@ -21,6 +21,7 @@ public class MainWindow {
     @FXML private TextField minimumLength;
     @FXML private TextArea output;
     @FXML private Label errorTextLabel;
+    @FXML private Label lengthError;
     @FXML private Button generatePasswordButton;
     
     private ViewModel vm;
@@ -33,14 +34,27 @@ public class MainWindow {
     	this.vm.getRequireUppercase().bind(this.mustIncludeUpperCaseLetters.selectedProperty());
     	this.minimumLength.setText(this.vm.getMinimumLength().getValue());
     	this.vm.getMinimumLength().bind(this.minimumLength.textProperty());
-    	
     	this.output.textProperty().bind(this.vm.getPassword());
     	this.errorTextLabel.textProperty().bind(this.vm.getErrorText());
-    	
+    	this.lengthError.setVisible(false);
+    	this.setupListenersForValidation();
     	this.generatePasswordButton.setOnAction(
     			(event) -> { 
     				this.vm.generatePassword();
     			} 
     	);
+    }
+    
+    private void setupListenersForValidation() {
+		this.minimumLength.textProperty().addListener((observable, oldValue, newValue) -> {
+				if (newValue.matches("\\d*\\D+\\d*") || newValue.matches("0\\d*")) {
+					this.minimumLength.setText(oldValue);
+					System.out.print("Triggered");
+					this.lengthError.setVisible(true);
+				} else {
+					this.lengthError.setVisible(false);
+					this.minimumLength.setText(newValue);
+				}
+		});
     }
 }
