@@ -15,7 +15,7 @@ class TestGeneratePassword {
 		
 		vm.generatePassword();
 		
-		assertEquals("", vm.getPassword().getValue(), "checking the password property");
+		assertTrue(vm.getPassword().get().isEmpty(), "checking the password property");
 		assertEquals("Invalid Minimum Length: must be a positive integer, but was apple", vm.getErrorText().getValue(), "checking the error text property");
 	}
 	
@@ -26,7 +26,7 @@ class TestGeneratePassword {
 		
 		vm.generatePassword();
 		
-		assertEquals("", vm.getPassword().getValue(), "checking the password property");
+		assertTrue(vm.getPassword().get().isEmpty(), "checking the password property");
 		assertEquals("Invalid Minimum Length: minimum length must be at least 1", vm.getErrorText().getValue(), "checking the error text property");
 	}
 	
@@ -37,7 +37,7 @@ class TestGeneratePassword {
 		
 		vm.generatePassword();
 		
-		assertTrue(vm.getPassword().getValue().length() >= 2, "checking the password property has an appropriate number of characters");
+		assertTrue(vm.getPassword().get().get(0).length() >= 2, "checking the password property has an appropriate number of characters");
 		assertEquals("", vm.getErrorText().getValue(), "checking the error text property");
 	}
 

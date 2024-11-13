@@ -4,9 +4,12 @@ import java.util.Random;
 
 import edu.westga.cs1302.password_generator.model.PasswordGenerator;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.beans.property.SimpleListProperty;
 
 /** Manages utilizing the model and makes properties available to bind the UI elements.
  * 
@@ -19,7 +22,7 @@ public class ViewModel {
 	private BooleanProperty requireLowercase;
 	private BooleanProperty requireUppercase;
 	
-	private StringProperty password;
+	private ListProperty<String> password;
 	private StringProperty errorText;
 	
     private PasswordGenerator generator;
@@ -32,7 +35,7 @@ public class ViewModel {
 		this.requireLowercase = new SimpleBooleanProperty(false);
 		this.requireUppercase = new SimpleBooleanProperty(false);
 		
-		this.password = new SimpleStringProperty("");
+		this.password = new SimpleListProperty<String>(FXCollections.observableArrayList());
 		this.errorText = new SimpleStringProperty("");
 
         Random randomNumberGenerator = new Random();
@@ -75,7 +78,7 @@ public class ViewModel {
 	 * 
 	 * @return the password property
 	 */
-	public StringProperty getPassword() {
+	public ListProperty<String> getPassword() {
 		return this.password;
 	}
 
@@ -89,13 +92,12 @@ public class ViewModel {
 
 	/** Generates a password using the minimum length, require digit, require lower case, and require upper case property values.
 	 * 
-	 * If a password is successfully generated, the error text property is set to empty string and the password property is set to the password generated.
+	 * If a password is successfully generated, the error text property is set to empty string and the password property has the new password prepended to it.
 	 * 
-	 * If an error is encountered, the password property is set to empty, and the error text property is populated with a message describing the problem.
+	 * If an error is encountered, the password property is unchanged, and the error text property is populated with a message describing the problem.
 	 */
 	public void generatePassword() {
     	int minimumLength = -1;
-    	this.password.setValue("");
     	
     	try {
     		minimumLength = Integer.parseInt(this.minimumLength.getValue());
@@ -115,9 +117,10 @@ public class ViewModel {
     	this.generator.setMustHaveAtLeastOneLowerCaseLetter(this.requireLowercase.getValue());
     	this.generator.setMustHaveAtLeastOneUpperCaseLetter(this.requireUppercase.getValue());
     	
+    	this.errorText.setValue("");
     	String password = this.generator.generatePassword();
     	
-    	this.password.setValue(password);
+    	this.password.add(0, password);
     }
 
 }
