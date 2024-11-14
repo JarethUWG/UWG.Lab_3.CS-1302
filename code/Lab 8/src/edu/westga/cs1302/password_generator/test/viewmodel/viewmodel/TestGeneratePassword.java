@@ -40,5 +40,19 @@ class TestGeneratePassword {
 		assertTrue(vm.getPassword().get().get(0).length() >= 2, "checking the password property has an appropriate number of characters");
 		assertEquals("", vm.getErrorText().getValue(), "checking the error text property");
 	}
+	
+	@Test
+	void testMultipleValidInputsProvided() {
+		ViewModel vm = new ViewModel();
+		vm.getMinimumLength().setValue("2");
+		vm.generatePassword();	
+		vm.getMinimumLength().setValue("4");	
+		vm.generatePassword();
+		
+		assertTrue(vm.getPassword().get().get(0).length() >= 4, "checking the password property has an appropriate number of characters");
+		assertEquals("", vm.getErrorText().getValue(), "checking the error text property");
+		assertTrue(vm.getPassword().get().get(1).length() >= 2, "checking the password property has an appropriate number of characters");
+		assertEquals("", vm.getErrorText().getValue(), "checking the error text property");
+	}
 
 }
