@@ -42,13 +42,25 @@ public class MainWindow {
     	
     	this.output.textProperty().bind(this.vm.getPassword());
     	this.errorTextLabel.textProperty().bind(this.vm.getErrorText());
-    	
+    	this.buttonDisableProperty();
     	this.generatePasswordButton.setOnAction(
     			(event) -> { 
     				this.vm.generatePassword();
     			} 
     	);
     }
+    
+    private void buttonDisableProperty() {
+    	this.minimumLength.textProperty().addListener((observable, oldValue, newValue) -> {
+		if (newValue == null) {
+			this.generatePasswordButton.disableProperty().set(true);
+		} else if (newValue.matches(".*\\d*\\D+\\d*.*") || newValue.isBlank() || newValue.matches("0")) {
+			this.generatePasswordButton.disableProperty().set(true);
+		} else {
+			this.generatePasswordButton.disableProperty().set(false);
+		}
+    	});
+	}
     
     @FXML
     void close(ActionEvent event) {
