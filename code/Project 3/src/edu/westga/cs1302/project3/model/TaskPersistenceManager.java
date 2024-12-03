@@ -61,14 +61,24 @@ public class TaskPersistenceManager {
 	 * @return A task manager containing the loaded tasks from the file
 	 * 
 	 * @throws FileNotFoundException if there is no file associated with dataFile
-	 * @throws IllegalArgumentException if the formatting of the file is incorrect
+	 * @throws ArrayIndexOutOfBoundsException if the formatting of the file is incorrect
 	 */
-	public TaskManager loadTaskData() throws FileNotFoundException, IllegalArgumentException {
+	public TaskManager loadTaskData() throws FileNotFoundException, ArrayIndexOutOfBoundsException {
 		List<Task> tasks = new ArrayList<Task>();
 		File inputFile = new File(this.dataFile);
+		Boolean badFormatting = false;
 		try (Scanner reader = new Scanner(inputFile)) {
 			while (reader.hasNextLine()) {
 				String[] taskData = reader.nextLine().strip().split("\t");
+				try {
+					taskData[2].length();
+					badFormatting = true;
+				} catch (ArrayIndexOutOfBoundsException goodFormatting) {
+					
+				}
+				if (badFormatting) {
+					throw new ArrayIndexOutOfBoundsException();
+				}
 				tasks.add(new Task(taskData[0], taskData[1]));
 			}
 		} 
