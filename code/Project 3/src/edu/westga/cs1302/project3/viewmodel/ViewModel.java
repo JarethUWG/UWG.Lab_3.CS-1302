@@ -21,6 +21,7 @@ public class ViewModel {
 	private TaskManager manager;
 	private ListProperty<Task> tasks;
 	private ObjectProperty<File> loadFile;
+	private ObjectProperty<File> saveFile;
 
 	/** Initialize the properties and TaskManager for the viewmodel 
 	 */
@@ -32,6 +33,7 @@ public class ViewModel {
 		this.manager.addTask(task1);
 		this.tasks = new SimpleListProperty<Task>(FXCollections.observableArrayList());
 		this.loadFile = new SimpleObjectProperty<File>();
+		this.saveFile = new SimpleObjectProperty<File>();
 		this.tasks.addAll(this.manager.getTasks());
 	}
 	
@@ -51,6 +53,14 @@ public class ViewModel {
 		return this.loadFile;
 	}
 	
+	/** Return the saveFile property
+	 * 
+	 * @return the saveFile property
+	 */
+	public ObjectProperty<File> getSaveFile() {
+		return this.saveFile;
+	}
+	
 	/** Manages loading from a selected file
 	 * 
 	 * @return true if the file successfully loaded and false if an exception was thrown
@@ -68,5 +78,22 @@ public class ViewModel {
 		} catch (FileNotFoundException doNothing) {	
 		}
 		return false;
+	}
+	
+	/** Manages saving to a selected file
+	 * 
+	 * @return true if the file successfully saves and false if an exception was thrown
+	 */
+	public boolean saveFileSelector() {
+		String selectedFilePath = this.saveFile.get().getPath();
+		TaskPersistenceManager saver = new TaskPersistenceManager(selectedFilePath);
+		try {
+			saver.saveTaskData(this.manager);
+			this.tasks.clear();
+			this.tasks.addAll(this.manager.getTasks());
+			return true;
+		} catch (Exception cannotWrite) {
+			return false;
+		}
 	}
 }

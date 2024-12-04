@@ -24,20 +24,24 @@ import javafx.stage.Stage;
 public class MainWindow {
 	@FXML private ListView<Task> taskDisplay;
 	@FXML private MenuItem menuLoadTask;
+	@FXML private MenuItem menuSaveTask;
 	@FXML private AnchorPane mainPane;
 	
 	 private ViewModel vm;
 	 private ObjectProperty<File> loadFile;
+	 private ObjectProperty<File> saveFile;
 	
 	 @FXML
 	 void initialize() {
 		this.vm = new ViewModel();
 		this.loadFile = new SimpleObjectProperty<File>();
+		this.saveFile = new SimpleObjectProperty<File>();
 		this.taskDisplay.itemsProperty().bindBidirectional(this.vm.getTasks());
 		this.loadFile.bindBidirectional(this.vm.getLoadFile());
+		this.saveFile.bindBidirectional(this.vm.getSaveFile());
 		this.menuLoadTask.setOnAction((event) -> {
 			FileChooser fileChooser = new FileChooser();
-			fileChooser.setTitle("Open Image File");
+			fileChooser.setTitle("Open Task File");
 			fileChooser.getExtensionFilters().addAll(
 			new ExtensionFilter("All Files", "*.*"));
 			Stage stage = (Stage) this.mainPane.getScene().getWindow();
@@ -53,5 +57,23 @@ public class MainWindow {
 				}
 			}
 		});
-	}
+		this.menuSaveTask.setOnAction((event) -> {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Save Task File");
+			fileChooser.getExtensionFilters().addAll(
+			new ExtensionFilter("All Files", "*.*"));
+			Stage stage = (Stage) this.mainPane.getScene().getWindow();
+			File selectedFile = fileChooser.showOpenDialog(stage);
+			if (selectedFile != null) {
+				this.saveFile.set(selectedFile);
+				if (!this.vm.saveFileSelector()) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setContentText("Selected File is cannot be writen onto");
+					alert.showAndWait();
+				} else {
+					this.vm.saveFileSelector();
+				}
+			}
+		});
+	 }
 }
