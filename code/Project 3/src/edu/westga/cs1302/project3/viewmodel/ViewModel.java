@@ -22,6 +22,7 @@ import javafx.collections.FXCollections;
 public class ViewModel {
 	private TaskManager manager;
 	private ListProperty<Task> tasks;
+	private ObjectProperty<Task> selectedTask;
 	private ObjectProperty<File> loadFile;
 	private ObjectProperty<File> saveFile;
 	private StringProperty taskTitle;
@@ -36,6 +37,7 @@ public class ViewModel {
 		this.manager.addTask(task2);
 		this.manager.addTask(task1);
 		this.tasks = new SimpleListProperty<Task>(FXCollections.observableArrayList());
+		this.selectedTask = new SimpleObjectProperty<Task>();
 		this.loadFile = new SimpleObjectProperty<File>();
 		this.saveFile = new SimpleObjectProperty<File>();
 		this.taskTitle = new SimpleStringProperty();
@@ -73,6 +75,14 @@ public class ViewModel {
 	 */
 	public StringProperty getTaskTitle() {
 		return this.taskTitle;
+	}
+	
+	/** Return the selectedTask property
+	 * 
+	 * @return the selectedTask property
+	 */
+	public ObjectProperty<Task> getSelectedTask() {
+		return this.selectedTask;
 	}
 	
 	/** Return the taskDescription property
@@ -130,6 +140,21 @@ public class ViewModel {
 			this.tasks.addAll(this.manager.getTasks());
 		} catch (Exception missingInputs) {
 			
+		}
+	}
+	
+	/** Removes task from the task list
+	 * 
+	 * @return true if task was successfully removed false if it wasn't
+	 */
+	public Boolean removeTask() {
+		try {
+			this.manager.removeTask(this.selectedTask.getValue());
+			this.tasks.clear();
+			this.tasks.addAll(this.manager.getTasks());
+			return true;
+		} catch (Exception notRemoved) {
+			return false;
 		}
 	}
 }

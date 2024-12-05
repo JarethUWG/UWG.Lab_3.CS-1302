@@ -33,6 +33,7 @@ public class MainWindow {
 	@FXML private MenuItem menuSaveTask;
 	@FXML private AnchorPane mainPane;
 	@FXML private Button addTask;
+	@FXML private Button removeTask;
 	
 	 private ViewModel vm;
 	 private ObjectProperty<File> loadFile;
@@ -44,6 +45,7 @@ public class MainWindow {
 		this.loadFile = new SimpleObjectProperty<File>();
 		this.saveFile = new SimpleObjectProperty<File>();
 		this.taskDisplay.itemsProperty().bindBidirectional(this.vm.getTasks());
+		this.vm.getSelectedTask().bind(this.taskDisplay.getSelectionModel().selectedItemProperty()); 
 		this.loadFile.bindBidirectional(this.vm.getLoadFile());
 		this.saveFile.bindBidirectional(this.vm.getSaveFile());
 		this.buttonManagement();
@@ -69,6 +71,15 @@ public class MainWindow {
 					System.out.print(bad.getMessage());
 				}
 			});
+		this.removeTask.setOnAction((event) -> {
+			if (this.vm.removeTask()) {
+				this.vm.removeTask();
+			} else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setContentText("No Task Selected");
+				alert.showAndWait();
+			}
+		});
 	 }
 	 
 	 private void menuManagement() {
