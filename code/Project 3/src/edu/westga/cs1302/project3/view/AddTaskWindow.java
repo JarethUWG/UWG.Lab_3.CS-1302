@@ -2,6 +2,8 @@ package edu.westga.cs1302.project3.view;
 
 import edu.westga.cs1302.project3.viewmodel.ViewModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -37,9 +39,19 @@ public class AddTaskWindow {
 		vm.getTaskTitle().bind(this.taskTitle.textProperty());
 		vm.getTaskDescription().bind(this.taskDescription.textProperty());
 		this.addTaskButton.setOnAction((event) -> {
-			vm.addNextTask();
-			Stage stage = (Stage) (this.addPane).getScene().getWindow();
-			stage.close();
+			try {
+				vm.addNextTask();
+				Stage stage = (Stage) (this.addPane).getScene().getWindow();
+				stage.close();
+			} catch (IllegalArgumentException badInput) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setContentText(badInput.getMessage());
+				alert.showAndWait();
+			} catch (IllegalStateException badInput) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setContentText(badInput.getMessage());
+				alert.showAndWait();
+			}
 		});
 	}
 

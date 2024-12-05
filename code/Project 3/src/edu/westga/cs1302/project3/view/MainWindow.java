@@ -67,14 +67,13 @@ public class MainWindow {
 					AddTaskWindow addTaskControls = (AddTaskWindow) loader.getController();
 					addTaskControls.viewModelManagement(this.vm);
 					stage.showAndWait();
-				} catch (Exception bad) {
-					System.out.print(bad.getMessage());
+				} catch (Exception bad) {	
 				}
 			});
-		this.removeTask.setOnAction((event) -> {
-			if (this.vm.removeTask()) {
+		this.removeTask.setOnAction((event) -> {		
+			try {
 				this.vm.removeTask();
-			} else {
+			} catch (IllegalStateException noneSelected) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setContentText("No Task Selected");
 				alert.showAndWait();

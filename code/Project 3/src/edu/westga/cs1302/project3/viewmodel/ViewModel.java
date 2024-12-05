@@ -129,32 +129,27 @@ public class ViewModel {
 		}
 	}
 	
-	/** Adds a new task to the task list if either 
-	 * title or description is blank it does nothing.
+	/** Adds a new task to the task list
+	 * 
+	 * @throws IllegalArgumentException if either title or description is missing
+	 * @throws IllegalStateException if a task with the same title already exists
 	 */
-	public void addNextTask() {
-		try {
-			Task nextTask = new Task(this.taskTitle.get(), this.taskDescription.get());
-			this.manager.addTask(nextTask);
-			this.tasks.clear();
-			this.tasks.addAll(this.manager.getTasks());
-		} catch (Exception missingInputs) {
-			
-		}
+	public void addNextTask() throws IllegalArgumentException, IllegalStateException {
+		Task nextTask = new Task(this.taskTitle.get(), this.taskDescription.get());
+		this.manager.addTask(nextTask);
+		this.tasks.add(0, nextTask);
 	}
 	
 	/** Removes task from the task list
 	 * 
-	 * @return true if task was successfully removed false if it wasn't
+	 * @throws IllegalStateException if object wasn't removed
 	 */
-	public Boolean removeTask() {
-		try {
+	public void removeTask() throws IllegalStateException {
+		if (this.selectedTask.getValue() == null) {
+			throw new IllegalStateException();
+		} else {
 			this.manager.removeTask(this.selectedTask.getValue());
-			this.tasks.clear();
-			this.tasks.addAll(this.manager.getTasks());
-			return true;
-		} catch (Exception notRemoved) {
-			return false;
+			this.tasks.remove(this.selectedTask.getValue());	
 		}
 	}
 }

@@ -1,7 +1,9 @@
 package edu.westga.cs1302.project3.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /** Stores and manages multiple tasks​
  *​
@@ -10,7 +12,8 @@ import java.util.List;
  */
 public class TaskManager {
 	private List<Task> tasks;
-	
+	private Map<String, Task> lookUpTasks;
+
 	/** Creates a new taskManager object.​
 	 * 
 	 * @precondition none​
@@ -21,8 +24,13 @@ public class TaskManager {
 	public TaskManager(List<Task> tasks) {
 		if (tasks == null) {
 			this.tasks = new ArrayList<Task>();
+			this.lookUpTasks = new HashMap<String, Task>();
 		} else {
 			this.tasks = tasks;
+			this.lookUpTasks = new HashMap<String, Task>();
+			for (Task task: this.tasks) {
+				this.lookUpTasks.put(task.getTitle(), task);
+			}
 		}
 	}
 
@@ -34,22 +42,35 @@ public class TaskManager {
 		return this.tasks;
 	}
 	
-	/** Adds a task to the task List
+	/** Returns the lookUpTable in the task manager
 	 * 
-	 * @precondition task != null​
-	 * @postcondition this.tasks.get(0) == task
+	 * @return the lookUpTable in the task manager
+	 */
+	public Map<String, Task> getLookUpTasks() {
+		return this.lookUpTasks;
+	}
+	
+	/** Adds a task to the task list
+	 * 
+	 * @precondition task != null && !(this.lookUpTasks.containsKey(task.getTitle()))​
+	 * @postcondition this.tasks.get(0) == task && this.lookUpTasks.containsKey(task.getTitle())
 	 * 
 	 * @param task the task to be added 
-	 * @throws IllegalArgumentException if precondition is violated
+	 * @throws IllegalArgumentException if null precondition is violated
+	 * @throws IllegalStateException if lookUp precondition is violated
 	 */
-	public void addTask(Task task) throws IllegalArgumentException {
+	public void addTask(Task task) throws IllegalArgumentException, IllegalStateException {
 		if (task == null) {
 			throw new IllegalArgumentException("Cannot add: task invalid.");
 		}
+		if (this.lookUpTasks.containsKey(task.getTitle())) {
+			throw new IllegalStateException("Task with title already exists");
+		}
 		this.tasks.add(0, task);
+		this.lookUpTasks.put(task.getTitle(), task);
 	}
 	
-	/** Removes all tasks with the same name and description as given task
+	/** Removes all tasks with the same name as given task
 	 *  from the task list
 	 * 
 	 * @precondition task != null​
@@ -59,20 +80,11 @@ public class TaskManager {
 	 * @throws IllegalArgumentException if precondition is violated
 	 */
 	public void removeTask(Task task) throws IllegalArgumentException {
-		ArrayList<Integer> removedIndexes = new ArrayList<Integer>();
-		int tasksSize = this.tasks.size();
 		if (task == null) {
 			throw new IllegalArgumentException("Cannot remove: no task selected.");
 		}
-		for (int index = 0; index < tasksSize; index++) {
-			if (this.tasks.get(index).getTitle().equals(task.getTitle()) 
-			&& this.tasks.get(index).getDescription().equals(task.getDescription())) {
-				removedIndexes.add(index);
-			}
+		this.tasks.remove(task);
+		this.lookUpTasks.remove(task.getTitle());
 		}
-		for (int removedIndex: removedIndexes) {
-			this.tasks.remove(removedIndex);
-		}
-	}
-		
 }
+		
