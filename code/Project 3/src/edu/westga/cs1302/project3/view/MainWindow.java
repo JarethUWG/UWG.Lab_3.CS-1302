@@ -95,7 +95,6 @@ public class MainWindow {
 				stage.initModality(Modality.APPLICATION_MODAL);
 				stage.showAndWait();
 			} catch (Exception bad) {
-				System.out.print("" + bad.getCause() + " " + bad.getMessage());
 			}
 		});
 	 }
