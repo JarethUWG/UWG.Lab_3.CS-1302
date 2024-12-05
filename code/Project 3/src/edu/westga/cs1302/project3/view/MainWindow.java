@@ -46,57 +46,68 @@ public class MainWindow {
 		this.taskDisplay.itemsProperty().bindBidirectional(this.vm.getTasks());
 		this.loadFile.bindBidirectional(this.vm.getLoadFile());
 		this.saveFile.bindBidirectional(this.vm.getSaveFile());
-		this.menuLoadTask.setOnAction((event) -> {
-			FileChooser fileChooser = new FileChooser();
-			fileChooser.setTitle("Open Task File");
-			fileChooser.getExtensionFilters().addAll(
-			new ExtensionFilter("All Files", "*.*"));
-			Stage stage = (Stage) this.mainPane.getScene().getWindow();
-			File selectedFile = fileChooser.showOpenDialog(stage);
-			if (selectedFile != null) {
-				this.loadFile.set(selectedFile);
-				if (!this.vm.loadFileSelector()) {
-					Alert alert = new Alert(AlertType.ERROR);
-					alert.setContentText("Selected File is improperly formatted");
-					alert.showAndWait();
-				} else {
-					this.vm.loadFileSelector();
+		this.buttonManagement();
+		this.menuManagement();
+	 }
+	 
+	 private void buttonManagement() {
+		 this.addTask.setOnAction((event) -> {
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(Main.class.getResource(Main.ADD_TASK_WINDOW));
+				try {
+					loader.load();
+					Parent parent = loader.getRoot();
+					Scene scene = new Scene(parent);
+					Stage stage = new Stage();
+					stage.setTitle(Main.ADD_TASK_WINDOW_TITLE);
+					stage.setScene(scene);
+					stage.initModality(Modality.APPLICATION_MODAL);
+					AddTaskWindow addTaskControls = (AddTaskWindow) loader.getController();
+					addTaskControls.viewModelManagement(this.vm);
+					stage.showAndWait();
+				} catch (Exception bad) {
+					System.out.print(bad.getMessage());
 				}
-			}
-		});
-		this.menuSaveTask.setOnAction((event) -> {
-			FileChooser fileChooser = new FileChooser();
-			fileChooser.setTitle("Save Task File");
-			fileChooser.getExtensionFilters().addAll(
-			new ExtensionFilter("All Files", "*.*"));
-			Stage stage = (Stage) this.mainPane.getScene().getWindow();
-			File selectedFile = fileChooser.showOpenDialog(stage);
-			if (selectedFile != null) {
-				this.saveFile.set(selectedFile);
-				if (!this.vm.saveFileSelector()) {
-					Alert alert = new Alert(AlertType.ERROR);
-					alert.setContentText("Selected File is cannot be writen onto");
-					alert.showAndWait();
-				} else {
-					this.vm.saveFileSelector();
+			});
+	 }
+	 
+	 private void menuManagement() {
+		 this.menuLoadTask.setOnAction((event) -> {
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Open Task File");
+				fileChooser.getExtensionFilters().addAll(
+				new ExtensionFilter("All Files", "*.*"));
+				Stage stage = (Stage) this.mainPane.getScene().getWindow();
+				File selectedFile = fileChooser.showOpenDialog(stage);
+				if (selectedFile != null) {
+					this.loadFile.set(selectedFile);
+					if (!this.vm.loadFileSelector()) {
+						Alert alert = new Alert(AlertType.ERROR);
+						alert.setContentText("Selected File is improperly formatted");
+						alert.showAndWait();
+					} else {
+						this.vm.loadFileSelector();
+					}
 				}
-			}
-		});
-		this.addTask.setOnAction((event) -> {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource(Main.ADD_TASK_WINDOW));
-			try {
-				loader.load();
-				Parent parent = loader.getRoot();
-				Scene scene = new Scene(parent);
-				Stage stage = new Stage();
-				stage.setTitle(Main.ADD_TASK_WINDOW_TITLE);
-				stage.setScene(scene);
-				stage.initModality(Modality.APPLICATION_MODAL);
-				stage.showAndWait();
-			} catch (Exception bad) {
-			}
-		});
+			});
+			this.menuSaveTask.setOnAction((event) -> {
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Save Task File");
+				fileChooser.getExtensionFilters().addAll(
+				new ExtensionFilter("All Files", "*.*"));
+				Stage stage = (Stage) this.mainPane.getScene().getWindow();
+				File selectedFile = fileChooser.showOpenDialog(stage);
+				if (selectedFile != null) {
+					this.saveFile.set(selectedFile);
+					if (!this.vm.saveFileSelector()) {
+						Alert alert = new Alert(AlertType.ERROR);
+						alert.setContentText("Selected File is cannot be writen onto");
+						alert.showAndWait();
+					} else {
+						this.vm.saveFileSelector();
+					}
+				}
+			});
 	 }
 	 
 }

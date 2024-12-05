@@ -10,6 +10,8 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 
 /** Manages utilizing the model and makes properties available to bind the UI elements.
@@ -22,6 +24,8 @@ public class ViewModel {
 	private ListProperty<Task> tasks;
 	private ObjectProperty<File> loadFile;
 	private ObjectProperty<File> saveFile;
+	private StringProperty taskTitle;
+	private StringProperty taskDescription;
 
 	/** Initialize the properties and TaskManager for the viewmodel 
 	 */
@@ -34,6 +38,8 @@ public class ViewModel {
 		this.tasks = new SimpleListProperty<Task>(FXCollections.observableArrayList());
 		this.loadFile = new SimpleObjectProperty<File>();
 		this.saveFile = new SimpleObjectProperty<File>();
+		this.taskTitle = new SimpleStringProperty();
+		this.taskDescription = new SimpleStringProperty();
 		this.tasks.addAll(this.manager.getTasks());
 	}
 	
@@ -59,6 +65,22 @@ public class ViewModel {
 	 */
 	public ObjectProperty<File> getSaveFile() {
 		return this.saveFile;
+	}
+	
+	/** Return the taskTitle property
+	 * 
+	 * @return the taskTitle property
+	 */
+	public StringProperty getTaskTitle() {
+		return this.taskTitle;
+	}
+	
+	/** Return the taskDescription property
+	 * 
+	 * @return the taskDescription property
+	 */
+	public StringProperty getTaskDescription() {
+		return this.taskDescription;
 	}
 	
 	/** Manages loading from a selected file
@@ -94,6 +116,20 @@ public class ViewModel {
 			return true;
 		} catch (Exception cannotWrite) {
 			return false;
+		}
+	}
+	
+	/** Adds a new task to the task list if either 
+	 * title or description is blank it does nothing.
+	 */
+	public void addNextTask() {
+		try {
+			Task nextTask = new Task(this.taskTitle.get(), this.taskDescription.get());
+			this.manager.addTask(nextTask);
+			this.tasks.clear();
+			this.tasks.addAll(this.manager.getTasks());
+		} catch (Exception missingInputs) {
+			
 		}
 	}
 }
