@@ -65,10 +65,9 @@ public class TaskPersistenceManager {
 	 * 
 	 * @return A task manager containing the loaded tasks from the file
 	 * 
-	 * @throws FileNotFoundException if there is no file associated with dataFile
 	 * @throws ArrayIndexOutOfBoundsException if the formatting of the file is incorrect
 	 */
-	public TaskManager loadTaskData() throws FileNotFoundException, ArrayIndexOutOfBoundsException {
+	public TaskManager loadTaskData() throws ArrayIndexOutOfBoundsException {
 		List<Task> tasks = new ArrayList<Task>();
 		File inputFile = new File(this.dataFile);
 		Boolean badFormatting = false;
@@ -86,6 +85,7 @@ public class TaskPersistenceManager {
 				}
 				tasks.add(new Task(taskData[0], taskData[1]));
 			}
+		} catch (FileNotFoundException fileCreatedInMethod) {
 		}
 		TaskManager manager = new TaskManager(tasks);
 		return manager;
