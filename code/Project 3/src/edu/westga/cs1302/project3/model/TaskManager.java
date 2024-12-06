@@ -18,12 +18,14 @@ public class TaskManager {
 	/**
 	 * Creates a new taskManager object.​
 	 * 
-	 * @precondition none​
+	 * @precondition no two tasks share the same title​
 	 * @postcondition this.tasks == tasks || this.tasks == new ArrayList< Task>()
 	 * 
-	 * @param tasks an optional preexisting list of tasks to add.​
+	 * @param tasks an optional preexisting list of tasks to add.
+	 * ​
+	 * @throws IllegalArgumentException if precondition is violated
 	 */
-	public TaskManager(List<Task> tasks) {
+	public TaskManager(List<Task> tasks) throws IllegalArgumentException {
 		if (tasks == null) {
 			this.tasks = new ArrayList<Task>();
 			this.lookUpTasks = new HashMap<String, Task>();
@@ -31,6 +33,9 @@ public class TaskManager {
 			this.tasks = tasks;
 			this.lookUpTasks = new HashMap<String, Task>();
 			for (Task task : this.tasks) {
+				if (this.lookUpTasks.containsKey(task.getTitle())) {
+					throw new IllegalArgumentException();
+				}
 				this.lookUpTasks.put(task.getTitle(), task);
 			}
 		}
@@ -64,7 +69,7 @@ public class TaskManager {
 	 * 
 	 * @param task the task to be added
 	 * @throws IllegalArgumentException if null precondition is violated
-	 * @throws IllegalStateException    if lookUp precondition is violated
+	 * @throws IllegalStateException if lookUp precondition is violated
 	 */
 	public void addTask(Task task) throws IllegalArgumentException, IllegalStateException {
 		if (task == null) {
@@ -78,9 +83,9 @@ public class TaskManager {
 	}
 
 	/**
-	 * Removes all tasks with the same name as given task from the task list
+	 * Removes a given task from the task list
 	 * 
-	 * @precondition task != null​
+	 * @precondition task != null && this.tasks.contains(task)​
 	 * @postcondition !this.tasks.contains(task)
 	 * 
 	 * @param task the task to be removed
@@ -89,6 +94,9 @@ public class TaskManager {
 	public void removeTask(Task task) throws IllegalArgumentException {
 		if (task == null) {
 			throw new IllegalArgumentException("Cannot remove: no task selected.");
+		} 
+		if (!this.lookUpTasks.containsKey(task.getTitle())) {
+			throw new IllegalArgumentException("Cannot remove: selected task not found.");
 		}
 		this.tasks.remove(task);
 		this.lookUpTasks.remove(task.getTitle());
