@@ -15,7 +15,7 @@ public class Task {
 	 * 
 	 * @precondition title != null && !title.isBlank() && description != null &&
 	 *               !description.isBlank()​
-	 * @postcondition this.title == title, this.description == description
+	 * @postcondition this.title == title && this.description == description
 	 * 
 	 * @param title       the name of the task
 	 * @param description a description of the task ​
