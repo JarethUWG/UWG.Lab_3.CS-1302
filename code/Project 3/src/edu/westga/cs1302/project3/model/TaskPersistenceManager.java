@@ -8,20 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/** Supports saving of task data
+/**
+ * Supports saving of task data
  * 
  * @author Jareth Batty
  * @version Fall 2024
  */
 public class TaskPersistenceManager {
 	private final String dataFile;
-	
-	/** Creates a new taskPersistenceManager object.​
+
+	/**
+	 * Creates a new taskPersistenceManager object.​
 	 * 
 	 * @precondition filePath != null​
 	 * @postcondition this.dataFile = filePath
 	 * 
-	 * @param filePath a file path for the file the user wishes to save and load task data from​
+	 * @param filePath a file path for the file the user wishes to save and load
+	 * task data from​
 	 */
 	public TaskPersistenceManager(String filePath) {
 		if (filePath == null) {
@@ -29,8 +32,9 @@ public class TaskPersistenceManager {
 		}
 		this.dataFile = filePath;
 	}
-	
-	/** Save tasks as a TSV
+
+	/**
+	 * Save tasks as a TSV
 	 * 
 	 * Writes all task data to DATA_FILE
 	 * 
@@ -53,8 +57,9 @@ public class TaskPersistenceManager {
 			}
 		}
 	}
-	
-	/** Loads tasks from a TSV file
+
+	/**
+	 * Loads tasks from a TSV file
 	 * 
 	 * Reads all task data from DATA_FILE
 	 * 
@@ -74,17 +79,16 @@ public class TaskPersistenceManager {
 					taskData[2].length();
 					badFormatting = true;
 				} catch (ArrayIndexOutOfBoundsException goodFormatting) {
-					
+
 				}
 				if (badFormatting) {
 					throw new ArrayIndexOutOfBoundsException();
 				}
 				tasks.add(new Task(taskData[0], taskData[1]));
 			}
-		} 
+		}
 		TaskManager manager = new TaskManager(tasks);
 		return manager;
-    }
-		
-}
+	}
 
+}

@@ -1,7 +1,6 @@
 package edu.westga.cs1302.project3.viewmodel;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 import edu.westga.cs1302.project3.model.Task;
 import edu.westga.cs1302.project3.model.TaskManager;
@@ -14,7 +13,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 
-/** Manages utilizing the model and makes properties available to bind the UI elements.
+/**
+ * Manages utilizing the model and makes properties available to bind the UI
+ * elements.
  * 
  * @author Jareth Batty
  * @version Fall 2024
@@ -28,7 +29,8 @@ public class ViewModel {
 	private StringProperty taskTitle;
 	private StringProperty taskDescription;
 
-	/** Initialize the properties and TaskManager for the viewmodel 
+	/**
+	 * Initialize the properties and TaskManager for the viewmodel
 	 */
 	public ViewModel() {
 		this.manager = new TaskManager(null);
@@ -44,56 +46,63 @@ public class ViewModel {
 		this.taskDescription = new SimpleStringProperty();
 		this.tasks.addAll(this.manager.getTasks());
 	}
-	
-	/** Return the tasks property
+
+	/**
+	 * Return the tasks property
 	 * 
 	 * @return the tasks property
 	 */
 	public ListProperty<Task> getTasks() {
 		return this.tasks;
 	}
-	
-	/** Return the loadFile property
+
+	/**
+	 * Return the loadFile property
 	 * 
 	 * @return the loadFile property
 	 */
 	public ObjectProperty<File> getLoadFile() {
 		return this.loadFile;
 	}
-	
-	/** Return the saveFile property
+
+	/**
+	 * Return the saveFile property
 	 * 
 	 * @return the saveFile property
 	 */
 	public ObjectProperty<File> getSaveFile() {
 		return this.saveFile;
 	}
-	
-	/** Return the taskTitle property
+
+	/**
+	 * Return the taskTitle property
 	 * 
 	 * @return the taskTitle property
 	 */
 	public StringProperty getTaskTitle() {
 		return this.taskTitle;
 	}
-	
-	/** Return the selectedTask property
+
+	/**
+	 * Return the selectedTask property
 	 * 
 	 * @return the selectedTask property
 	 */
 	public ObjectProperty<Task> getSelectedTask() {
 		return this.selectedTask;
 	}
-	
-	/** Return the taskDescription property
+
+	/**
+	 * Return the taskDescription property
 	 * 
 	 * @return the taskDescription property
 	 */
 	public StringProperty getTaskDescription() {
 		return this.taskDescription;
 	}
-	
-	/** Manages loading from a selected file
+
+	/**
+	 * Manages loading from a selected file
 	 * 
 	 * @return true if the file successfully loaded and false if an exception was thrown
 	 */
@@ -105,14 +114,13 @@ public class ViewModel {
 			this.tasks.clear();
 			this.tasks.addAll(this.manager.getTasks());
 			return true;
-		} catch (ArrayIndexOutOfBoundsException badFormat) {
+		} catch (Exception notLoaded) {
 			return false;
-		} catch (FileNotFoundException doNothing) {	
 		}
-		return false;
 	}
-	
-	/** Manages saving to a selected file
+
+	/**
+	 * Manages saving to a selected file
 	 * 
 	 * @return true if the file successfully saves and false if an exception was thrown
 	 */
@@ -128,8 +136,9 @@ public class ViewModel {
 			return false;
 		}
 	}
-	
-	/** Adds a new task to the task list
+
+	/**
+	 * Adds a new task to the task list
 	 * 
 	 * @throws IllegalArgumentException if either title or description is missing
 	 * @throws IllegalStateException if a task with the same title already exists
@@ -139,8 +148,9 @@ public class ViewModel {
 		this.manager.addTask(nextTask);
 		this.tasks.add(0, nextTask);
 	}
-	
-	/** Removes task from the task list
+
+	/**
+	 * Removes a selected task from the task list
 	 * 
 	 * @throws IllegalStateException if object wasn't removed
 	 */
@@ -149,7 +159,7 @@ public class ViewModel {
 			throw new IllegalStateException();
 		} else {
 			this.manager.removeTask(this.selectedTask.getValue());
-			this.tasks.remove(this.selectedTask.getValue());	
+			this.tasks.remove(this.selectedTask.getValue());
 		}
 	}
 }

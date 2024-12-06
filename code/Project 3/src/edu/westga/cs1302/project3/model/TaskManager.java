@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** Stores and manages multiple tasks​
- *​
+/**
+ * Stores and manages multiple tasks​ ​
+ * 
  * @author Jareth Batty​
  * @version Fall 2024​
  */
@@ -14,7 +15,8 @@ public class TaskManager {
 	private List<Task> tasks;
 	private Map<String, Task> lookUpTasks;
 
-	/** Creates a new taskManager object.​
+	/**
+	 * Creates a new taskManager object.​
 	 * 
 	 * @precondition none​
 	 * @postcondition this.tasks == tasks || this.tasks == new ArrayList< Task>()
@@ -28,50 +30,55 @@ public class TaskManager {
 		} else {
 			this.tasks = tasks;
 			this.lookUpTasks = new HashMap<String, Task>();
-			for (Task task: this.tasks) {
+			for (Task task : this.tasks) {
 				this.lookUpTasks.put(task.getTitle(), task);
 			}
 		}
 	}
 
-	/** Returns all tasks in the task manager
+	/**
+	 * Returns all tasks in the task manager
 	 * 
 	 * @return all tasks in the task manager
 	 */
 	public List<Task> getTasks() {
 		return this.tasks;
 	}
-	
-	/** Returns the lookUpTable in the task manager
+
+	/**
+	 * Returns the lookUpTable in the task manager
 	 * 
 	 * @return the lookUpTable in the task manager
 	 */
 	public Map<String, Task> getLookUpTasks() {
 		return this.lookUpTasks;
 	}
-	
-	/** Adds a task to the task list
+
+	/**
+	 * Adds a task to the task list
 	 * 
-	 * @precondition task != null && !(this.lookUpTasks.containsKey(task.getTitle()))​
-	 * @postcondition this.tasks.get(0) == task && this.lookUpTasks.containsKey(task.getTitle())
+	 * @precondition task != null &&
+	 *               !(this.lookUpTasks.containsKey(task.getTitle()))​
+	 * @postcondition this.tasks.get(0) == task &&
+	 *                this.lookUpTasks.containsKey(task.getTitle())
 	 * 
-	 * @param task the task to be added 
+	 * @param task the task to be added
 	 * @throws IllegalArgumentException if null precondition is violated
-	 * @throws IllegalStateException if lookUp precondition is violated
+	 * @throws IllegalStateException    if lookUp precondition is violated
 	 */
 	public void addTask(Task task) throws IllegalArgumentException, IllegalStateException {
 		if (task == null) {
 			throw new IllegalArgumentException("Cannot add: task invalid.");
 		}
 		if (this.lookUpTasks.containsKey(task.getTitle())) {
-			throw new IllegalStateException("Task with title already exists");
+			throw new IllegalStateException("Task with given title already exists");
 		}
 		this.tasks.add(0, task);
 		this.lookUpTasks.put(task.getTitle(), task);
 	}
-	
-	/** Removes all tasks with the same name as given task
-	 *  from the task list
+
+	/**
+	 * Removes all tasks with the same name as given task from the task list
 	 * 
 	 * @precondition task != null​
 	 * @postcondition !this.tasks.contains(task)
@@ -85,6 +92,5 @@ public class TaskManager {
 		}
 		this.tasks.remove(task);
 		this.lookUpTasks.remove(task.getTitle());
-		}
+	}
 }
-		

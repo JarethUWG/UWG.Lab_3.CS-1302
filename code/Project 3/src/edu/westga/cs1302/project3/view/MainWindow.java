@@ -22,7 +22,8 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/** Codebehind for the Main Window of the application.
+/**
+ * Codebehind for the Main Window of the application.
  * 
  * @author CS 1302
  * @version Fall 2024
@@ -34,90 +35,88 @@ public class MainWindow {
 	@FXML private AnchorPane mainPane;
 	@FXML private Button addTask;
 	@FXML private Button removeTask;
-	
-	 private ViewModel vm;
-	 private ObjectProperty<File> loadFile;
-	 private ObjectProperty<File> saveFile;
-	
-	 @FXML
-	 void initialize() {
+
+	private ViewModel vm;
+	private ObjectProperty<File> loadFile;
+	private ObjectProperty<File> saveFile;
+
+	@FXML
+	void initialize() {
 		this.vm = new ViewModel();
 		this.loadFile = new SimpleObjectProperty<File>();
 		this.saveFile = new SimpleObjectProperty<File>();
 		this.taskDisplay.itemsProperty().bindBidirectional(this.vm.getTasks());
-		this.vm.getSelectedTask().bind(this.taskDisplay.getSelectionModel().selectedItemProperty()); 
+		this.vm.getSelectedTask().bind(this.taskDisplay.getSelectionModel().selectedItemProperty());
 		this.loadFile.bindBidirectional(this.vm.getLoadFile());
 		this.saveFile.bindBidirectional(this.vm.getSaveFile());
 		this.buttonManagement();
 		this.menuManagement();
-	 }
-	 
-	 private void buttonManagement() {
-		 this.addTask.setOnAction((event) -> {
-				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(Main.class.getResource(Main.ADD_TASK_WINDOW));
-				try {
-					loader.load();
-					Parent parent = loader.getRoot();
-					Scene scene = new Scene(parent);
-					Stage stage = new Stage();
-					stage.setTitle(Main.ADD_TASK_WINDOW_TITLE);
-					stage.setScene(scene);
-					stage.initModality(Modality.APPLICATION_MODAL);
-					AddTaskWindow addTaskControls = (AddTaskWindow) loader.getController();
-					addTaskControls.viewModelManagement(this.vm);
-					stage.showAndWait();
-				} catch (Exception bad) {	
-				}
-			});
-		this.removeTask.setOnAction((event) -> {		
+	}
+
+	private void buttonManagement() {
+		this.addTask.setOnAction((event) -> {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource(Main.ADD_TASK_WINDOW));
+			try {
+				loader.load();
+				Parent parent = loader.getRoot();
+				Scene scene = new Scene(parent);
+				Stage stage = new Stage();
+				stage.setTitle(Main.ADD_TASK_WINDOW_TITLE);
+				stage.setScene(scene);
+				stage.initModality(Modality.APPLICATION_MODAL);
+				AddTaskWindow addTaskControls = (AddTaskWindow) loader.getController();
+				addTaskControls.viewModelManagement(this.vm);
+				stage.showAndWait();
+			} catch (Exception bad) {
+			}
+		});
+		this.removeTask.setOnAction((event) -> {
 			try {
 				this.vm.removeTask();
 			} catch (IllegalStateException noneSelected) {
 				Alert alert = new Alert(AlertType.ERROR);
-				alert.setContentText("No Task Selected");
+				alert.setContentText("No task selected");
 				alert.showAndWait();
 			}
 		});
-	 }
-	 
-	 private void menuManagement() {
-		 this.menuLoadTask.setOnAction((event) -> {
-				FileChooser fileChooser = new FileChooser();
-				fileChooser.setTitle("Open Task File");
-				fileChooser.getExtensionFilters().addAll(
-				new ExtensionFilter("All Files", "*.*"));
-				Stage stage = (Stage) this.mainPane.getScene().getWindow();
-				File selectedFile = fileChooser.showOpenDialog(stage);
-				if (selectedFile != null) {
-					this.loadFile.set(selectedFile);
-					if (!this.vm.loadFileSelector()) {
-						Alert alert = new Alert(AlertType.ERROR);
-						alert.setContentText("Selected File is improperly formatted");
-						alert.showAndWait();
-					} else {
-						this.vm.loadFileSelector();
-					}
+	}
+
+	private void menuManagement() {
+		this.menuLoadTask.setOnAction((event) -> {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Open Task File");
+			fileChooser.getExtensionFilters().addAll(new ExtensionFilter("All Files", "*.*"));
+			Stage stage = (Stage) this.mainPane.getScene().getWindow();
+			File selectedFile = fileChooser.showOpenDialog(stage);
+			if (selectedFile != null) {
+				this.loadFile.set(selectedFile);
+				if (!this.vm.loadFileSelector()) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setContentText("Selected file is improperly formatted");
+					alert.showAndWait();
+				} else {
+					this.vm.loadFileSelector();
 				}
-			});
-			this.menuSaveTask.setOnAction((event) -> {
-				FileChooser fileChooser = new FileChooser();
-				fileChooser.setTitle("Save Task File");
-				fileChooser.getExtensionFilters().addAll(
-				new ExtensionFilter("All Files", "*.*"));
-				Stage stage = (Stage) this.mainPane.getScene().getWindow();
-				File selectedFile = fileChooser.showOpenDialog(stage);
-				if (selectedFile != null) {
-					this.saveFile.set(selectedFile);
-					if (!this.vm.saveFileSelector()) {
-						Alert alert = new Alert(AlertType.ERROR);
-						alert.setContentText("Selected File is cannot be writen onto");
-						alert.showAndWait();
-					} else {
-						this.vm.saveFileSelector();
-					}
+			}
+		});
+		this.menuSaveTask.setOnAction((event) -> {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Save Task File");
+			fileChooser.getExtensionFilters().addAll(new ExtensionFilter("All Files", "*.*"));
+			Stage stage = (Stage) this.mainPane.getScene().getWindow();
+			File selectedFile = fileChooser.showOpenDialog(stage);
+			if (selectedFile != null) {
+				this.saveFile.set(selectedFile);
+				if (!this.vm.saveFileSelector()) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setContentText("Selected file cannot be writen onto");
+					alert.showAndWait();
+				} else {
+					this.vm.saveFileSelector();
 				}
-			});
-	 }
-	 
+			}
+		});
+	}
+
 }

@@ -10,7 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/** Codebehind for the Add Task Window of the application.
+/**
+ * Codebehind for the Add Task Window of the application.
  * 
  * @author CS 1302
  * @version Fall 2024
@@ -19,9 +20,9 @@ public class AddTaskWindow {
 	@FXML private Button addTaskButton;
 	@FXML private Button cancel;
 	@FXML private AnchorPane addPane;
-    @FXML private TextField taskTitle;
-	@FXML private TextArea taskDescription;	
-	
+	@FXML private TextField taskTitle;
+	@FXML private TextArea taskDescription;
+
 	@FXML
 	void initialize() {
 		this.cancel.setOnAction((event) -> {
@@ -29,9 +30,10 @@ public class AddTaskWindow {
 			stage.close();
 		});
 	}
-	
-	/** Binds a the properties of a view to appropriate 
-	 * local properties and manages events related to vm.
+
+	/**
+	 * Binds a the properties of a view to appropriate local properties and manages
+	 * events related to vm.
 	 * 
 	 * @param vm the ViewModel to bind
 	 */
@@ -47,9 +49,9 @@ public class AddTaskWindow {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setContentText(badInput.getMessage());
 				alert.showAndWait();
-			} catch (IllegalStateException badInput) {
+			} catch (IllegalStateException sameTitle) {
 				Alert alert = new Alert(AlertType.ERROR);
-				alert.setContentText(badInput.getMessage());
+				alert.setContentText(sameTitle.getMessage());
 				alert.showAndWait();
 			}
 		});
